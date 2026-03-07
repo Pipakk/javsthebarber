@@ -149,57 +149,83 @@ class HexCanvas {
 }
 
 /* ══════════════════════════════════════
-   2. HERO VIDEO — autoplay robusto (iOS + cross-origin safe)
+   2. HERO VIDEO — autoplay universal (iOS Safari, Chrome iOS, Android, Desktop)
 ══════════════════════════════════════ */
 function initHeroVideo() {
   const video = qs('#heroVideo');
-  const wrap  = qs('.hero__video-wrap');
+  const wrap  = qs('#heroVideoWrap');
   if (!video || !wrap) return;
 
-  let resolved = false;
+  let shown = false;
 
-  const onReady = () => {
-    if (resolved) return;
-    resolved = true;
+  /* Muestra el vídeo con fade-in una sola vez */
+  const showVideo = () => {
+    if (shown) return;
+    shown = true;
     video.classList.add('ready');
   };
 
-  const onFail = () => {
-    if (resolved) return;
-    resolved = true;
-    /* Vídeo no disponible: ocultamos el wrapper para mostrar el
-       fondo estático (local.png) con el overlay CSS encima */
-    wrap.classList.add('video-failed');
+  /* Fallback: oculta el vídeo, el fondo CSS (local.png + overlay) queda visible */
+  const showFallback = () => {
+    if (shown) return;
+    shown = true;
     video.style.display = 'none';
+    wrap.classList.add('video-failed');
   };
 
-  /* iOS requiere un intento explícito de play() después de
-     que el usuario haya interactuado o tras el primer canplay */
-  const tryPlay = () => {
-    video.play()
-      .then(onReady)
-      .catch(onFail);
+  /* ── Intento de play ──
+     En iOS el play() DEBE llamarse directamente desde JS (no basta con el atributo HTML).
+     El catch es imprescindible — sin él, una NotAllowedError rompe el hilo. */
+  const attemptPlay = () => {
+    const p = video.play();
+    if (p !== undefined) {
+      p.then(showVideo).catch(showFallback);
+    } else {
+      /* API antigua (iOS < 10): si no lanza, asumimos que va */
+      showVideo();
+    }
   };
 
-  /* canplay: el navegador tiene suficientes datos para reproducir */
-  video.addEventListener('canplay', tryPlay, { once: true });
+  /* ── Estrategia de carga ──
+     1. Si ya tiene datos suficientes, intentamos play directamente.
+     2. Si no, escuchamos el primer evento que indique que hay datos. */
+  if (video.readyState >= 3) {
+    /* HAVE_FUTURE_DATA o mayor: listo para reproducir */
+    attemptPlay();
+  } else {
+    /* canplaythrough = tiene todo el buffer necesario */
+    video.addEventListener('canplaythrough', attemptPlay, { once: true });
+    /* canplay = puede empezar aunque no tenga todo el buffer */
+    video.addEventListener('canplay', attemptPlay, { once: true });
+  }
 
-  /* Timeout de seguridad: si en 4 s no hay canplay, pasamos al fallback */
-  const timeout = setTimeout(() => {
-    if (!resolved) onFail();
-  }, 4000);
+  /* Confirma cuando realmente está en reproducción (doble seguridad) */
+  video.addEventListener('playing', showVideo, { once: true });
 
-  /* Si el vídeo carga rápido (caché o local), limpiamos el timeout */
-  video.addEventListener('playing', () => {
-    clearTimeout(timeout);
-    onReady();
-  }, { once: true });
+  /* Error de archivo no encontrado o codec no soportado */
+  video.addEventListener('error', showFallback, { once: true });
 
-  /* Error de red / CORS / blocked */
-  video.addEventListener('error', onFail, { once: true });
+  /* ── Timeout de seguridad ──
+     Si en 5 s no se ha resuelto nada (red lenta, archivo no encontrado)
+     mostramos el fallback estático. */
+  const safetyTimer = setTimeout(() => {
+    if (!shown) showFallback();
+  }, 5000);
 
-  /* Forzar carga */
+  video.addEventListener('playing', () => clearTimeout(safetyTimer), { once: true });
+
+  /* ── iOS Low Power Mode / restricciones de datos ──
+     En estos casos readyState se queda en 0 para siempre sin error.
+     Forzamos la carga explícitamente. */
   video.load();
+
+  /* ── Recuperación tras visibilidad (tab oculto o iOS background) ──
+     Cuando el usuario vuelve a la pestaña/app, iOS pausa el vídeo. Lo reanudamos. */
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && shown && video.paused) {
+      video.play().catch(() => {});
+    }
+  });
 }
 
 /* ══════════════════════════════════════

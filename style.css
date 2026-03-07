@@ -367,7 +367,6 @@ canvas { display: block; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* Negro total mientras el vídeo no ha cargado */
   background: var(--black-deep);
 }
 
@@ -377,16 +376,28 @@ canvas { display: block; }
   object-fit: cover;
   object-position: center;
   display: block;
-  /* Oculto por defecto; JS lo muestra cuando puede reproducirse */
   opacity: 0;
   transition: opacity 0.8s ease;
+  pointer-events: none;  /* nunca intercepta toques ni clicks */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .hero__video.ready {
   opacity: 1;
 }
 
-/* Overlay oscuro — siempre encima del vídeo O del fondo estático */
+/* ── Eliminar controles nativos de iOS/WebKit ──
+   Safari y Chrome en iOS muestran un botón de play sobre el video
+   si el navegador considera que no puede reproducirlo automáticamente.
+   Estas reglas lo suprimen completamente. */
+.hero__video::-webkit-media-controls             { display: none !important; }
+.hero__video::-webkit-media-controls-enclosure   { display: none !important; }
+.hero__video::-webkit-media-controls-panel       { display: none !important; }
+.hero__video::-webkit-media-controls-play-button { display: none !important; }
+.hero__video::-webkit-media-controls-start-playback-button { display: none !important; }
+
+/* Overlay oscuro — z-index mayor que el vídeo, cubre cualquier UI del browser */
 .hero__video-overlay {
   position: absolute;
   inset: 0;
@@ -394,10 +405,11 @@ canvas { display: block; }
   background:
     linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%),
     linear-gradient(to top,   rgba(0,0,0,0.55) 0%, transparent 55%);
+  pointer-events: none;
 }
 
-/* Cuando el vídeo no arranca, el wrapper muestra negro puro
-   (el fondo del .hero ya tiene local.png, el overlay lo oscurece) */
+/* Cuando el vídeo falla: wrapper transparente,
+   el fondo estático (local.png en .hero) + overlay quedan visibles */
 .hero__video-wrap.video-failed {
   background: transparent;
 }

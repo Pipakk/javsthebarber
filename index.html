@@ -48,14 +48,7 @@
   <section class="hero" id="hero">
 
     <!-- Video de fondo -->
-    <div class="hero__video-wrap">
-      <!--
-        IMPORTANTE PARA PRODUCCIÓN:
-        Descarga el vídeo desde https://www.pexels.com/video/barber-tools-on-a-mat-7697544/
-        y colócalo en: video/hero.mp4
-        iOS Safari bloquea autoplay de vídeos cross-origin (CDN externas).
-        Con el archivo local funciona en todos los dispositivos.
-      -->
+    <div class="hero__video-wrap" id="heroVideoWrap">
       <video
         class="hero__video"
         id="heroVideo"
@@ -63,10 +56,16 @@
         muted
         loop
         playsinline
-        preload="metadata"
+        webkit-playsinline
+        x5-playsinline
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="false"
+        disablePictureInPicture
+        preload="auto"
+        tabindex="-1"
+        aria-hidden="true"
       >
         <source src="video/hero.mp4" type="video/mp4" />
-        <source src="https://videos.pexels.com/video-files/7697544/7697544-hd_1920_1080_30fps.mp4" type="video/mp4" />
       </video>
       <div class="hero__video-overlay"></div>
     </div>
