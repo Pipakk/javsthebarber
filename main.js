@@ -151,7 +151,43 @@ class HexCanvas {
 /* ══════════════════════════════════════
    2. HERO — imagen estática, sin vídeo
 ══════════════════════════════════════ */
-function initHeroVideo() { /* no-op */ }
+function initHeroVideo() {
+  const video    = document.getElementById('heroVideo');
+  const fallback = document.getElementById('heroFallback');
+  if (!video) return;
+
+  function showVideo() {
+    video.classList.add('ready');
+    if (fallback) fallback.classList.add('hidden');
+  }
+
+  function showFallback() {
+    video.style.display = 'none';
+    if (fallback) {
+      fallback.classList.remove('hidden');
+      fallback.style.opacity = '1';
+    }
+  }
+
+  /* Intentar reproducir */
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => showVideo())
+      .catch(() => showFallback());
+  }
+
+  /* Por si play() resuelve pero el vídeo se detiene sin datos */
+  video.addEventListener('playing', showVideo, { once: true });
+  video.addEventListener('error',   showFallback, { once: true });
+
+  /* Timeout de seguridad: si en 4s no hay imagen, mostrar fallback */
+  const timeout = setTimeout(() => {
+    if (!video.classList.contains('ready')) showFallback();
+  }, 4000);
+
+  video.addEventListener('playing', () => clearTimeout(timeout), { once: true });
+}
 
 /* ══════════════════════════════════════
    3. HEXÁGONOS FONDO SECCIÓN (servicios)

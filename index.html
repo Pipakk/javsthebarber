@@ -28,7 +28,6 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a class="nav__logo" href="#hero">
-        <img class="nav__logo-img" src="images/icon.png" alt="JAVS THE BARBER" />
         <div class="nav__logo-text">
           <span class="nav__logo-main">JAVS</span>
           <span class="nav__logo-sub">THE BARBER</span>
@@ -56,9 +55,14 @@
   ══════════════════════════════════════ -->
   <section class="hero" id="hero">
 
-    <!-- Fondo hero: imagen estática con Ken Burns suave -->
+    <!-- Fondo hero: vídeo con fallback a imagen estática -->
     <div class="hero__bg" aria-hidden="true">
-      <div class="hero__bg-img"></div>
+      <video class="hero__video" id="heroVideo"
+        autoplay muted loop playsinline webkit-playsinline
+        preload="auto" disablepictureinpicture tabindex="-1">
+        <source src="video/hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__bg-img" id="heroFallback"></div>
       <div class="hero__bg-overlay"></div>
     </div>
 
