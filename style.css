@@ -350,6 +350,16 @@ canvas { display: block; }
   align-items: center;
   overflow: hidden;
   padding-top: var(--nav-h);
+
+  /*
+    Fallback siempre oscuro: si el vídeo no carga (iOS, lento, sin red)
+    se muestra local.png oscurecido — nunca chairs.png sin overlay.
+    El overlay CSS garantiza que el texto sea siempre legible.
+  */
+  background-color: var(--black-deep);
+  background-image: url('images/local.png');
+  background-size: cover;
+  background-position: center 30%;
 }
 
 /* Wrapper video */
@@ -357,6 +367,8 @@ canvas { display: block; }
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* Negro total mientras el vídeo no ha cargado */
+  background: var(--black-deep);
 }
 
 .hero__video {
@@ -365,15 +377,29 @@ canvas { display: block; }
   object-fit: cover;
   object-position: center;
   display: block;
+  /* Oculto por defecto; JS lo muestra cuando puede reproducirse */
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-/* Overlay oscuro sobre el video — doble capa: negro profundo + degradado lateral */
+.hero__video.ready {
+  opacity: 1;
+}
+
+/* Overlay oscuro — siempre encima del vídeo O del fondo estático */
 .hero__video-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
-    linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.2) 100%),
-    linear-gradient(to top,   rgba(0,0,0,0.6)  0%, transparent 50%);
+    linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%),
+    linear-gradient(to top,   rgba(0,0,0,0.55) 0%, transparent 55%);
+}
+
+/* Cuando el vídeo no arranca, el wrapper muestra negro puro
+   (el fondo del .hero ya tiene local.png, el overlay lo oscurece) */
+.hero__video-wrap.video-failed {
+  background: transparent;
 }
 
 /* Contenido hero */

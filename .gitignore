@@ -34,6 +34,11 @@ pnpm-lock.yaml
 # ── Vercel ────────────────────────────────
 .vercel/
 
+# ── Vídeo (subir directamente a Vercel, no a git) ─────────
+# Sube hero.mp4 manualmente en el dashboard de Vercel
+# o ponlo en el repo si es pequeño (< 50 MB)
+# video/hero.mp4
+
 # ── Builds / dist ─────────────────────────
 dist/
 build/

@@ -149,14 +149,57 @@ class HexCanvas {
 }
 
 /* ══════════════════════════════════════
-   2. HERO VIDEO — autoplay seguro
+   2. HERO VIDEO — autoplay robusto (iOS + cross-origin safe)
 ══════════════════════════════════════ */
 function initHeroVideo() {
-  const video = qs('.hero__video');
-  if (!video) return;
-  video.play().catch(() => {
-    /* Si autoplay bloqueado (poco habitual con muted+playsinline), sin error */
-  });
+  const video = qs('#heroVideo');
+  const wrap  = qs('.hero__video-wrap');
+  if (!video || !wrap) return;
+
+  let resolved = false;
+
+  const onReady = () => {
+    if (resolved) return;
+    resolved = true;
+    video.classList.add('ready');
+  };
+
+  const onFail = () => {
+    if (resolved) return;
+    resolved = true;
+    /* Vídeo no disponible: ocultamos el wrapper para mostrar el
+       fondo estático (local.png) con el overlay CSS encima */
+    wrap.classList.add('video-failed');
+    video.style.display = 'none';
+  };
+
+  /* iOS requiere un intento explícito de play() después de
+     que el usuario haya interactuado o tras el primer canplay */
+  const tryPlay = () => {
+    video.play()
+      .then(onReady)
+      .catch(onFail);
+  };
+
+  /* canplay: el navegador tiene suficientes datos para reproducir */
+  video.addEventListener('canplay', tryPlay, { once: true });
+
+  /* Timeout de seguridad: si en 4 s no hay canplay, pasamos al fallback */
+  const timeout = setTimeout(() => {
+    if (!resolved) onFail();
+  }, 4000);
+
+  /* Si el vídeo carga rápido (caché o local), limpiamos el timeout */
+  video.addEventListener('playing', () => {
+    clearTimeout(timeout);
+    onReady();
+  }, { once: true });
+
+  /* Error de red / CORS / blocked */
+  video.addEventListener('error', onFail, { once: true });
+
+  /* Forzar carga */
+  video.load();
 }
 
 /* ══════════════════════════════════════
