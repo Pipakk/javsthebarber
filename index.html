@@ -47,27 +47,12 @@
   ══════════════════════════════════════ -->
   <section class="hero" id="hero">
 
-    <!-- Video de fondo -->
-    <div class="hero__video-wrap" id="heroVideoWrap">
-      <video
-        class="hero__video"
-        id="heroVideo"
-        autoplay
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        x5-playsinline
-        x5-video-player-type="h5"
-        x5-video-player-fullscreen="false"
-        disablePictureInPicture
-        preload="auto"
-        tabindex="-1"
-        aria-hidden="true"
-      >
-        <source src="video/hero.mp4" type="video/mp4" />
-      </video>
-      <div class="hero__video-overlay"></div>
+    <!-- Fondo Ken Burns — crossfade entre imágenes del local -->
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__bg-slide hero__bg-slide--1"></div>
+      <div class="hero__bg-slide hero__bg-slide--2"></div>
+      <div class="hero__bg-slide hero__bg-slide--3"></div>
+      <div class="hero__bg-overlay"></div>
     </div>
 
     <!-- Contenido hero -->

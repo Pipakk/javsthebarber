@@ -149,84 +149,10 @@ class HexCanvas {
 }
 
 /* ══════════════════════════════════════
-   2. HERO VIDEO — autoplay universal (iOS Safari, Chrome iOS, Android, Desktop)
+   2. HERO — Ken Burns (CSS puro, sin vídeo)
+   No requiere inicialización JS. Las animaciones corren en CSS.
 ══════════════════════════════════════ */
-function initHeroVideo() {
-  const video = qs('#heroVideo');
-  const wrap  = qs('#heroVideoWrap');
-  if (!video || !wrap) return;
-
-  let shown = false;
-
-  /* Muestra el vídeo con fade-in una sola vez */
-  const showVideo = () => {
-    if (shown) return;
-    shown = true;
-    video.classList.add('ready');
-  };
-
-  /* Fallback: oculta el vídeo, el fondo CSS (local.png + overlay) queda visible */
-  const showFallback = () => {
-    if (shown) return;
-    shown = true;
-    video.style.display = 'none';
-    wrap.classList.add('video-failed');
-  };
-
-  /* ── Intento de play ──
-     En iOS el play() DEBE llamarse directamente desde JS (no basta con el atributo HTML).
-     El catch es imprescindible — sin él, una NotAllowedError rompe el hilo. */
-  const attemptPlay = () => {
-    const p = video.play();
-    if (p !== undefined) {
-      p.then(showVideo).catch(showFallback);
-    } else {
-      /* API antigua (iOS < 10): si no lanza, asumimos que va */
-      showVideo();
-    }
-  };
-
-  /* ── Estrategia de carga ──
-     1. Si ya tiene datos suficientes, intentamos play directamente.
-     2. Si no, escuchamos el primer evento que indique que hay datos. */
-  if (video.readyState >= 3) {
-    /* HAVE_FUTURE_DATA o mayor: listo para reproducir */
-    attemptPlay();
-  } else {
-    /* canplaythrough = tiene todo el buffer necesario */
-    video.addEventListener('canplaythrough', attemptPlay, { once: true });
-    /* canplay = puede empezar aunque no tenga todo el buffer */
-    video.addEventListener('canplay', attemptPlay, { once: true });
-  }
-
-  /* Confirma cuando realmente está en reproducción (doble seguridad) */
-  video.addEventListener('playing', showVideo, { once: true });
-
-  /* Error de archivo no encontrado o codec no soportado */
-  video.addEventListener('error', showFallback, { once: true });
-
-  /* ── Timeout de seguridad ──
-     Si en 5 s no se ha resuelto nada (red lenta, archivo no encontrado)
-     mostramos el fallback estático. */
-  const safetyTimer = setTimeout(() => {
-    if (!shown) showFallback();
-  }, 5000);
-
-  video.addEventListener('playing', () => clearTimeout(safetyTimer), { once: true });
-
-  /* ── iOS Low Power Mode / restricciones de datos ──
-     En estos casos readyState se queda en 0 para siempre sin error.
-     Forzamos la carga explícitamente. */
-  video.load();
-
-  /* ── Recuperación tras visibilidad (tab oculto o iOS background) ──
-     Cuando el usuario vuelve a la pestaña/app, iOS pausa el vídeo. Lo reanudamos. */
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && shown && video.paused) {
-      video.play().catch(() => {});
-    }
-  });
-}
+function initHeroVideo() { /* no-op: replaced by CSS Ken Burns */ }
 
 /* ══════════════════════════════════════
    3. HEXÁGONOS FONDO SECCIÓN (servicios)
@@ -297,24 +223,8 @@ function initReveal() {
    (eliminado el scroll en canvas para rendimiento)
 ══════════════════════════════════════ */
 function initParallax() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth < 768) return;
-
-  const heroVideo = qs('.hero__video');
-  if (!heroVideo) return;
-
-  let ticking = false;
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const sy = window.scrollY;
-        heroVideo.style.transform = `translateY(${sy * 0.25}px) scale(1.05)`;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
+  /* El Ken Burns CSS hace el movimiento de fondo.
+     No se aplica parallax adicional para no interferir con las animaciones. */
 }
 
 /* ══════════════════════════════════════
