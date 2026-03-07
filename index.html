@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="JAVS THE BARBER — Barbería premium en Madrid. Cortes de alta precisión, ambiente exclusivo. Reserva tu cita en Booksy." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>JAVS THE BARBER — Barbería Premium Madrid</title>
+
+  <!-- Fuentes premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAVEGACIÓN STICKY
+  ══════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#hero">
+        <span class="nav__logo-main">JAVS</span>
+        <span class="nav__logo-sub">THE BARBER</span>
+      </a>
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#experiencia" class="nav__link">Experiencia</a></li>
+        <li><a href="#servicios" class="nav__link">Servicios</a></li>
+        <li><a href="#local" class="nav__link">El Local</a></li>
+        <li><a href="#resenas" class="nav__link">Reseñas</a></li>
+        <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+           target="_blank" rel="noopener" class="btn btn--nav">Reservar</a>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Overlay menú móvil -->
+  <div class="nav__overlay" id="navOverlay"></div>
+
+  <!-- ══════════════════════════════════════
+       HERO FULLSCREEN — VIDEO BG
+  ══════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <!-- Video de fondo -->
+    <div class="hero__video-wrap">
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="images/chairs.png"
+      >
+        <source src="https://videos.pexels.com/video-files/7697544/7697544-hd_1920_1080_30fps.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__video-overlay"></div>
+    </div>
+
+    <!-- Contenido hero -->
+    <div class="hero__content">
+
+      <div class="hero__eyebrow">
+        <span class="hero__line"></span>
+        Madrid · Camarena 167
+        <span class="hero__line"></span>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="hero__title-javs">JAVS</span>
+        <span class="hero__title-the">THE</span>
+        <span class="hero__title-barber">BARBER</span>
+      </h1>
+
+      <p class="hero__claim">
+        Tu imagen, en manos del detalle.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+           target="_blank" rel="noopener" class="btn btn--primary">
+          <span class="btn__inner">Reservar Cita</span>
+          <span class="btn__glow"></span>
+        </a>
+        <a href="#servicios" class="btn btn--ghost">Ver Servicios</a>
+      </div>
+
+      <div class="hero__rating">
+        <div class="hero__stars">★★★★★</div>
+        <div class="hero__rating-text">4.9 · 181 reseñas verificadas</div>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEPARADOR HEXAGONAL
+  ══════════════════════════════════════ -->
+  <div class="hex-divider">
+    <canvas class="hex-divider__canvas" data-hex-strip></canvas>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECCIÓN: IDENTIDAD / EXPERIENCIA
+  ══════════════════════════════════════ -->
+  <section class="experiencia" id="experiencia">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-eyebrow reveal-up">Por qué JAVS</div>
+        <h2 class="section-title reveal-up delay-1">
+          Cada visita,<br />
+          <em>con intención.</em>
+        </h2>
+      </div>
+
+      <div class="experiencia__grid">
+
+        <div class="experiencia__feature reveal-up delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Técnica y criterio</h3>
+          <p>Años afinando el oficio. El resultado se percibe desde la primera línea, sin necesidad de explicación.</p>
+        </div>
+
+        <div class="experiencia__feature reveal-up delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 24C16 19.6 19.6 16 24 16C28.4 16 32 19.6 32 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="26" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>El espacio importa</h3>
+          <p>Mármol negro, luces hexagonales, ambiente cuidado. Un entorno diseñado para que la experiencia esté a la altura.</p>
+        </div>
+
+        <div class="experiencia__feature reveal-up delay-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 36L20 20L28 28L36 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="36" cy="12" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>181 opiniones</h3>
+          <p>4.9 sobre 5 en Booksy. Una valoración que se construye cita a cita, cliente a cliente.</p>
+        </div>
+
+      </div>
+
+      <!-- Imagen inmersiva del local -->
+      <div class="experiencia__visual reveal-scale">
+        <div class="experiencia__img-wrap">
+          <img src="images/local.png" alt="Interior JAVS THE BARBER" loading="lazy" />
+          <div class="experiencia__img-overlay"></div>
+          <div class="experiencia__img-badge">
+            <span class="badge-num">4.9</span>
+            <span class="badge-label">Valoración<br>Booksy</span>
+          </div>
+        </div>
+        <div class="experiencia__quote">
+          <blockquote>
+            "Vine con una idea del corte, me asesoró y me hizo un corte de 10. Buen ambiente, charla y profesionalidad."
+          </blockquote>
+          <cite>— Alexander · Cliente verificado Booksy</cite>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECCIÓN: SERVICIOS
+  ══════════════════════════════════════ -->
+  <section class="servicios" id="servicios">
+
+    <div class="servicios__bg-hex">
+      <canvas data-hex-bg id="hexBgCanvas"></canvas>
+    </div>
+
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow reveal-up">Servicios</div>
+        <h2 class="section-title reveal-up delay-1">
+          Lo que hacemos,<br />
+          <em>sin concesiones.</em>
+        </h2>
+      </div>
+
+      <div class="servicios__grid">
+
+        <div class="servicio-card reveal-up delay-1">
+          <div class="servicio-card__num">01</div>
+          <div class="servicio-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="36" r="6" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="36" cy="36" r="6" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 30L28 14M36 30L20 14M24 20L24 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="servicio-card__name">Corte</h3>
+          <p class="servicio-card__desc">Fade, skin fade, texturizado o clásico. Adaptado a tu estilo, ejecutado con precisión.</p>
+          <div class="servicio-card__footer">
+            <span class="servicio-card__price">15€</span>
+            <span class="servicio-card__time">30 min</span>
+          </div>
+          <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+             target="_blank" rel="noopener" class="servicio-card__cta">Reservar →</a>
+          <div class="servicio-card__glow"></div>
+        </div>
+
+        <div class="servicio-card reveal-up delay-2 servicio-card--featured">
+          <div class="servicio-card__badge">Más popular</div>
+          <div class="servicio-card__num">02</div>
+          <div class="servicio-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="36" r="6" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="36" cy="36" r="6" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 30L28 14M36 30L20 14M24 20L24 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 20 Q14 14 18 18 Q22 22 26 16 Q30 10 34 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="servicio-card__name">Corte + Barba</h3>
+          <p class="servicio-card__desc">Corte y barba en una sola sesión. Delineado, perfilado y acabado que cierra la imagen.</p>
+          <div class="servicio-card__footer">
+            <span class="servicio-card__price">22€</span>
+            <span class="servicio-card__time">55 min</span>
+          </div>
+          <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+             target="_blank" rel="noopener" class="servicio-card__cta">Reservar →</a>
+          <div class="servicio-card__glow"></div>
+        </div>
+
+        <div class="servicio-card reveal-up delay-3">
+          <div class="servicio-card__num">03</div>
+          <div class="servicio-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 38C20 38 18 30 24 24C30 18 38 20 38 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 10L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="servicio-card__name">Corte Niños</h3>
+          <p class="servicio-card__desc">Hasta 8 años. Mismo cuidado, mismo criterio. Un corte que se hace bien desde el principio.</p>
+          <div class="servicio-card__footer">
+            <span class="servicio-card__price">10€</span>
+            <span class="servicio-card__time">30 min</span>
+          </div>
+          <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+             target="_blank" rel="noopener" class="servicio-card__cta">Reservar →</a>
+          <div class="servicio-card__glow"></div>
+        </div>
+
+      </div>
+
+      <div class="servicios__cta reveal-up delay-4">
+        <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+           target="_blank" rel="noopener" class="btn btn--primary btn--large">
+          <span class="btn__inner">Ver todos los servicios en Booksy</span>
+          <span class="btn__glow"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECCIÓN: EL LOCAL (GALERÍA INMERSIVA)
+  ══════════════════════════════════════ -->
+  <section class="local" id="local">
+    <div class="local__sticky-container">
+
+      <div class="local__header">
+        <div class="section-eyebrow reveal-up">El Local</div>
+        <h2 class="section-title reveal-up delay-1">
+          Un espacio que<br />
+          <em>se reconoce.</em>
+        </h2>
+      </div>
+
+      <!-- Galería horizontal táctil -->
+      <div class="local__gallery-wrapper">
+        <div class="local__gallery" id="localGallery">
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/chairs.png" alt="Sillones premium JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Sillones</span>
+              <p>Piel negra, estructura de cromo. Cada detalle pensado.</p>
+            </div>
+          </div>
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/local.png" alt="Vista completa del local" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">El Espacio</span>
+              <p>Mármol negro, paredes blancas, techo hexagonal. Una identidad visual que se recuerda.</p>
+            </div>
+          </div>
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/hexagons.png" alt="Luces hexagonales LED" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Techo LED</span>
+              <p>Hexágonos de luz LED suspendidos en negro. La firma visual del local.</p>
+            </div>
+          </div>
+
+          <div class="local__slide local__slide--barber">
+            <div class="local__slide-img">
+              <img src="images/javs.png" alt="Javier, barbero en Madrid" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Tu Barbero</span>
+              <p>Javier Moreno. Escucha, asesora y ejecuta. El resultado habla por sí solo.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controles galería -->
+        <div class="local__gallery-nav">
+          <button class="gallery-btn gallery-btn--prev" id="galleryPrev" aria-label="Anterior">‹</button>
+          <div class="gallery-dots" id="galleryDots"></div>
+          <button class="gallery-btn gallery-btn--next" id="galleryNext" aria-label="Siguiente">›</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEPARADOR HEXAGONAL 2
+  ══════════════════════════════════════ -->
+  <div class="hex-divider hex-divider--inverted">
+    <canvas class="hex-divider__canvas" data-hex-strip></canvas>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECCIÓN: RESEÑAS
+  ══════════════════════════════════════ -->
+  <section class="resenas" id="resenas">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-eyebrow reveal-up">Clientes</div>
+        <h2 class="section-title reveal-up delay-1">
+          La mejor referencia<br />
+          <em>es quien ya estuvo.</em>
+        </h2>
+        <div class="resenas__rating reveal-up delay-2">
+          <div class="resenas__stars">★★★★★</div>
+          <div class="resenas__meta">
+            <strong>4.9</strong> de 5 · <span>181 reseñas verificadas en Booksy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resenas__track" id="resenasTrack">
+
+        <div class="resena-card reveal-up delay-1">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">A</div>
+            <div>
+              <div class="resena-card__name">Alexander</div>
+              <div class="resena-card__service">Corte · Feb 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"Javier es un absoluto máquina. Vine con una idea del corte, me asesoró y me hizo un corte de pelo de 10. Encima buen ambiente, charla y profesionalidad. Muy recomendable."</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+        <div class="resena-card reveal-up delay-2">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">P</div>
+            <div>
+              <div class="resena-card__name">Pablo</div>
+              <div class="resena-card__service">Corte · Ene 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"Servicio inmejorable y barbero majísimo. El corte increíble. 100% recomendable."</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+        <div class="resena-card reveal-up delay-3">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">L</div>
+            <div>
+              <div class="resena-card__name">Luis</div>
+              <div class="resena-card__service">Corte · Feb 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"Excelente como siempre. Gracias."</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+        <div class="resena-card reveal-up delay-1">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">C</div>
+            <div>
+              <div class="resena-card__name">Cristian</div>
+              <div class="resena-card__service">Corte · Feb 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"Buen corte, muy buena atención."</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+        <div class="resena-card reveal-up delay-2">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">C</div>
+            <div>
+              <div class="resena-card__name">Carles</div>
+              <div class="resena-card__service">Corte · Feb 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"Corte 10/10."</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+        <div class="resena-card reveal-up delay-3">
+          <div class="resena-card__header">
+            <div class="resena-card__avatar">D</div>
+            <div>
+              <div class="resena-card__name">Dionysios</div>
+              <div class="resena-card__service">Corte y Barba · Feb 2026</div>
+            </div>
+            <div class="resena-card__stars">★★★★★</div>
+          </div>
+          <p class="resena-card__text">"¡Genial!"</p>
+          <div class="resena-card__verified">✓ Cliente verificado</div>
+        </div>
+
+      </div>
+
+      <div class="resenas__booksy reveal-up delay-4">
+        <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+           target="_blank" rel="noopener">Ver todas las reseñas en Booksy →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CTA FINAL POTENTE
+  ══════════════════════════════════════ -->
+  <section class="cta-final">
+    <div class="cta-final__hex-bg">
+      <canvas id="ctaHexCanvas"></canvas>
+    </div>
+    <div class="cta-final__marble"></div>
+
+    <div class="container">
+      <div class="cta-final__inner">
+        <div class="section-eyebrow reveal-up" style="color: rgba(255,255,255,0.5)">Madrid · Camarena 167</div>
+        <h2 class="cta-final__title reveal-up delay-1">
+          Tu próxima cita<br />
+          <em>en un minuto.</em>
+        </h2>
+        <p class="cta-final__sub reveal-up delay-2">
+          Reserva online, sin llamadas. Elige día y hora desde Booksy.
+        </p>
+        <div class="reveal-up delay-3">
+          <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+             target="_blank" rel="noopener" class="btn btn--primary btn--xl">
+            <span class="btn__inner">Pide tu cita en Booksy</span>
+            <span class="btn__glow"></span>
+          </a>
+        </div>
+        <div class="cta-final__details reveal-up delay-4">
+          <span>📍 Calle Camarena 167, 28047 Madrid</span>
+          <span class="cta-final__sep">·</span>
+          <span>⭐ 4.9 · 181 reseñas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__hex-line"></div>
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="footer__logo-main">JAVS</span>
+            <span class="footer__logo-sub">THE BARBER</span>
+          </div>
+          <p class="footer__tagline">Madrid, Camarena 167.<br />Tu corte, tu imagen, tu nivel.</p>
+        </div>
+
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Ubicación</h4>
+            <p>Calle Camarena 167<br />28047, Madrid</p>
+          </div>
+          <div class="footer__col">
+            <h4>Reservas</h4>
+            <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+               target="_blank" rel="noopener">Booksy</a>
+          </div>
+          <div class="footer__col">
+            <h4>Redes</h4>
+            <a href="https://www.instagram.com/javsthebarber/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 JAVS THE BARBER. Madrid.</span>
+        <div class="footer__rating">★ 4.9 en Booksy</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CTA FLOTANTE MÓVIL -->
+  <div class="cta-float" id="ctaFloat">
+    <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
+       target="_blank" rel="noopener" class="cta-float__btn">
+      <span>✂ Reservar Cita</span>
+    </a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
