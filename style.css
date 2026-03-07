@@ -94,6 +94,8 @@ body {
 }
 
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* video inside hero must NOT inherit the img reset */
+video { display: block; max-width: none; }
 a { color: inherit; text-decoration: none; }
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
 canvas { display: block; }
@@ -387,39 +389,48 @@ canvas { display: block; }
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;   /* center on all axes */
+  justify-content: center;
   overflow: hidden;
-  background: var(--black-deep);
+  background: #0a0a0a;
 }
 
-/* Background layer — fills entire section */
+/* ── Background container: pinned behind everything ── */
 .hero__bg {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: 0;
+  overflow: hidden;
 }
 
-/* Video: true fullscreen cover, always behind everything */
+/* ── Video: fills the entire bg container ── */
 .hero__video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
   object-position: center center;
-  z-index: 0;
+  z-index: 1;
   opacity: 0;
   transition: opacity 1s ease;
   pointer-events: none;
   display: block;
+  /* override global img rule */
+  max-width: none;
 }
 .hero__video.ready { opacity: 1; }
 
-/* Fallback static image (shown while/if video can't play) */
+/* ── Fallback image: visible until video plays ── */
 .hero__bg-img {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-image: url('video/imagen.png');
   background-size: cover;
   background-position: center center;
@@ -429,7 +440,7 @@ canvas { display: block; }
   animation: heroBgZoom 18s ease-in-out infinite alternate;
   will-change: transform;
 }
-.hero__bg-img.hidden { opacity: 0; pointer-events: none; }
+.hero__bg-img.hidden { opacity: 0; }
 
 @keyframes heroBgZoom {
   from { transform: scale(1.00); }
@@ -439,31 +450,30 @@ canvas { display: block; }
   .hero__bg-img { animation: none; }
 }
 
-/* Dark scrim — uniform vignette, no left/right bias */
+/* ── Dark scrim over the video, below text ── */
 .hero__bg-overlay {
   position: absolute;
-  inset: 0;
-  z-index: 1;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
   pointer-events: none;
   background:
-    /* bottom-up gradient for text legibility */
-    linear-gradient(to top,   rgba(0,0,0,0.70) 0%,  rgba(0,0,0,0.10) 50%, transparent 100%),
-    /* top-down gradient for nav contrast */
-    linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 35%),
-    /* uniform base dimming */
-    rgba(0,0,0,0.40);
+    linear-gradient(to top,    rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, transparent 30%),
+    rgba(0,0,0,0.35);
 }
 
-/* ── Hero content: centered column, full width ── */
+/* ── Hero content: centered overlay, above scrim ── */
 .hero__content {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 700px;
-  padding: clamp(80px, 18vw, 160px) clamp(20px, 6vw, 60px) clamp(100px, 14vw, 140px);
+  max-width: 640px;
+  /* safe horizontal padding for small phones */
+  padding: clamp(80px, 15vw, 140px) clamp(24px, 5vw, 56px) clamp(96px, 13vw, 130px);
   margin: 0 auto;
   box-sizing: border-box;
-  text-align: center;        /* center all text on all breakpoints */
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1584,6 +1594,75 @@ canvas { display: block; }
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
+}
+
+/* ══════════════════════════════════════
+   SECCIÓN FIDELIZACIÓN
+══════════════════════════════════════ */
+.fidelidad {
+  padding: clamp(48px, 8vw, 80px) 0;
+  background: var(--black-mid);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.fidelidad__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(20px, 4vw, 28px);
+}
+
+/* Sellos decorativos */
+.fidelidad__stamps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.fidelidad__stamp {
+  font-size: clamp(18px, 4vw, 24px);
+  opacity: 0.55;
+  transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+}
+
+.fidelidad__stamp--free {
+  opacity: 1;
+  font-size: clamp(22px, 5vw, 28px);
+  filter: drop-shadow(0 0 8px rgba(201,169,110,0.5));
+}
+
+/* Texto principal */
+.fidelidad__text {
+  font-family: var(--font-ui);
+  font-size: clamp(15px, 3vw, 19px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.fidelidad__text strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Botón */
+.fidelidad__btn {
+  font-size: clamp(13px, 2.5vw, 15px);
+  padding: clamp(14px, 2.5vw, 18px) clamp(28px, 5vw, 40px);
+}
+
+@media (max-width: 479px) {
+  .fidelidad__btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
 }
 
 /* ══════════════════════════════════════
