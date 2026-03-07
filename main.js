@@ -149,66 +149,9 @@ class HexCanvas {
 }
 
 /* ══════════════════════════════════════
-   2. HERO — Vídeo con fallback Ken Burns
-   Intenta reproducir video/hero.mp4.
-   Si falla o tarda más de 4s → Ken Burns CSS permanece visible.
-   Si el vídeo arranca → se superpone con fade-in, Ken Burns se pausa.
+   2. HERO — imagen estática, sin vídeo
 ══════════════════════════════════════ */
-function initHeroVideo() {
-  const video = qs('#heroVideo');
-  const kb    = qs('#heroKb');
-  if (!video) return;
-
-  let videoActive = false;
-
-  const activateVideo = () => {
-    if (videoActive) return;
-    videoActive = true;
-    video.classList.add('playing');        /* fade-in del vídeo */
-    if (kb) kb.classList.add('paused');    /* pausa el Ken Burns (ahorra GPU) */
-    clearTimeout(fallbackTimer);
-  };
-
-  /* Sin timeout agresivo — el Ken Burns ya cubre mientras carga */
-  const fallbackTimer = setTimeout(() => {
-    /* Después de 4 s sin vídeo, el Ken Burns sigue corriendo normalmente.
-       No hacemos nada especial: ya es el estado por defecto. */
-  }, 4000);
-
-  /* Intentar play en cuanto haya datos suficientes */
-  const tryPlay = () => {
-    const p = video.play();
-    if (p !== undefined) {
-      p.then(activateVideo).catch(() => { /* Ken Burns sigue como fallback */ });
-    } else {
-      activateVideo(); /* API sin Promise (navegadores muy antiguos) */
-    }
-  };
-
-  if (video.readyState >= 3) {
-    tryPlay();
-  } else {
-    video.addEventListener('canplay',        tryPlay,        { once: true });
-    video.addEventListener('canplaythrough', tryPlay,        { once: true });
-  }
-
-  video.addEventListener('playing', activateVideo, { once: true });
-
-  /* Si el archivo no existe o hay error de red → Ken Burns permanece */
-  video.addEventListener('error', () => {
-    video.style.display = 'none';
-    clearTimeout(fallbackTimer);
-  }, { once: true });
-
-  /* Reanudar si el usuario vuelve a la pestaña (iOS pausa en background) */
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && videoActive && video.paused) {
-      video.play().catch(() => {});
-    }
-  });
-
-  video.load();
-}
+function initHeroVideo() { /* no-op */ }
 
 /* ══════════════════════════════════════
    3. HEXÁGONOS FONDO SECCIÓN (servicios)

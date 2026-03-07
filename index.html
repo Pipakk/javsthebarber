@@ -7,6 +7,12 @@
   <meta name="theme-color" content="#0a0a0a" />
   <title>JAVS THE BARBER — Barbería Premium Madrid</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32"  href="images/icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon.png" />
+  <link rel="apple-touch-icon"                      href="images/icon.png" />
+  <meta name="msapplication-TileImage"             content="images/icon.png" />
+
   <!-- Fuentes premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,8 +28,11 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a class="nav__logo" href="#hero">
-        <span class="nav__logo-main">JAVS</span>
-        <span class="nav__logo-sub">THE BARBER</span>
+        <img class="nav__logo-img" src="images/icon.png" alt="JAVS THE BARBER" />
+        <div class="nav__logo-text">
+          <span class="nav__logo-main">JAVS</span>
+          <span class="nav__logo-sub">THE BARBER</span>
+        </div>
       </a>
       <button class="nav__menu-btn" id="menuBtn" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -47,31 +56,9 @@
   ══════════════════════════════════════ -->
   <section class="hero" id="hero">
 
-    <!-- Fondo hero: vídeo con fallback Ken Burns -->
-    <div class="hero__bg" id="heroBg" aria-hidden="true">
-
-      <!-- Vídeo (prioridad) — JS lo activa si el browser puede reproducirlo -->
-      <video
-        id="heroVideo"
-        class="hero__video"
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        preload="auto"
-        tabindex="-1"
-      >
-        <source src="video/hero.mp4" type="video/mp4" />
-      </video>
-
-      <!-- Ken Burns (fallback) — siempre presente en DOM, visible si el vídeo falla -->
-      <div class="hero__kb" id="heroKb">
-        <div class="hero__kb-slide hero__kb-slide--1"></div>
-        <div class="hero__kb-slide hero__kb-slide--2"></div>
-        <div class="hero__kb-slide hero__kb-slide--3"></div>
-      </div>
-
-      <!-- Overlay oscuro — siempre encima de todo -->
+    <!-- Fondo hero: imagen estática con Ken Burns suave -->
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__bg-img"></div>
       <div class="hero__bg-overlay"></div>
     </div>
 

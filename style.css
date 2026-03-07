@@ -136,10 +136,25 @@ canvas { display: block; }
 
 .nav__logo {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   line-height: 1;
+}
+
+.nav__logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(201,169,110,0.25));
+}
+
+.nav__logo-text {
+  display: flex;
+  flex-direction: column;
   gap: 1px;
 }
+
 .nav__logo-main {
   font-family: var(--font-display);
   font-size: 22px;
@@ -340,7 +355,7 @@ canvas { display: block; }
 }
 
 /* ══════════════════════════════════════
-   HERO — VÍDEO + FALLBACK KEN BURNS
+   HERO — IMAGEN ESTÁTICA + ZOOM SUAVE
 ══════════════════════════════════════ */
 .hero {
   position: relative;
@@ -354,7 +369,6 @@ canvas { display: block; }
   background: var(--black-deep);
 }
 
-/* ── Bloque de fondo: ocupa exactamente el hero ── */
 .hero__bg {
   position: absolute;
   top: 0; left: 0;
@@ -362,100 +376,37 @@ canvas { display: block; }
   z-index: 0;
 }
 
-/* ── VÍDEO ── */
-.hero__video {
+/* Imagen de fondo: tijeras premium de barbería (Unsplash, libre de derechos) */
+.hero__bg-img {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 1.2s ease;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-select: none;
-  display: block;
-}
-
-.hero__video.playing {
-  opacity: 1;
-}
-
-.hero__video::-webkit-media-controls,
-.hero__video::-webkit-media-controls-enclosure,
-.hero__video::-webkit-media-controls-panel,
-.hero__video::-webkit-media-controls-play-button,
-.hero__video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-}
-
-/* ── KEN BURNS (fallback debajo del vídeo) ── */
-.hero__kb {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-}
-
-.hero__kb-slide {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80&auto=format&fit=crop');
   background-size: cover;
-  opacity: 0;
-  will-change: transform, opacity;
+  background-position: center 40%;
+  animation: heroBgZoom 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-.hero__kb-slide--1 {
-  background-image: url('images/local.png');
-  background-position: center 20%;
-  animation: kbFade 21s 0s infinite;
-}
-.hero__kb-slide--2 {
-  background-image: url('images/chairs.png');
-  background-position: center 30%;
-  animation: kbFade 21s 7s infinite;
-}
-.hero__kb-slide--3 {
-  background-image: url('images/hexagons.png');
-  background-position: center 50%;
-  animation: kbFade 21s 14s infinite;
+@keyframes heroBgZoom {
+  from { transform: scale(1.00); }
+  to   { transform: scale(1.06); }
 }
 
-@keyframes kbFade {
-  0%   { opacity: 0; transform: scale(1.00); }
-  4%   { opacity: 1; transform: scale(1.02); }
-  28%  { opacity: 1; transform: scale(1.08); }
-  33%  { opacity: 0; transform: scale(1.09); }
-  100% { opacity: 0; transform: scale(1.00); }
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg-img { animation: none; }
 }
 
-.hero__kb.paused .hero__kb-slide {
-  animation-play-state: paused;
-}
-
-/* ── OVERLAY oscuro: encima de vídeo y Ken Burns, debajo del contenido ── */
+/* Overlay oscuro siempre encima de la imagen */
 .hero__bg-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.12) 100%),
-    linear-gradient(to top,   rgba(0,0,0,0.55) 0%, transparent 55%);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__kb-slide { animation: kbStatic 21s infinite !important; }
-  @keyframes kbStatic {
-    0%  { opacity: 0; transform: none; }
-    4%  { opacity: 1; transform: none; }
-    28% { opacity: 1; transform: none; }
-    33% { opacity: 0; transform: none; }
-    100%{ opacity: 0; transform: none; }
-  }
+    linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.58) 55%, rgba(0,0,0,0.35) 100%),
+    linear-gradient(to top,   rgba(0,0,0,0.60) 0%, transparent 60%);
 }
 
 /* Contenido hero — encima del overlay (z2) */
