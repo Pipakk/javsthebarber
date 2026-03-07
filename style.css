@@ -1637,6 +1637,13 @@ canvas { display: block; }
   color: var(--grey-light);
 }
 
+.fidelidad__num {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.03em;
+}
+
 .fidelidad__text {
   font-family: var(--font-ui);
   font-size: clamp(13px, 2.5vw, 16px);
