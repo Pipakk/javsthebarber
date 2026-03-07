@@ -38,9 +38,8 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav__links" id="navLinks">
-        <li><a href="#experiencia" class="nav__link">Experiencia</a></li>
-        <li><a href="#servicios" class="nav__link">Servicios</a></li>
         <li><a href="#local" class="nav__link">El Local</a></li>
+        <li><a href="#servicios" class="nav__link">Servicios</a></li>
         <li><a href="#cortes" class="nav__link">Cortes</a></li>
         <li><a href="#resenas" class="nav__link">Reseñas</a></li>
         <a href="https://booksy.com/es-es/70621_javs-the-barber_barberia_53009_madrid#ba_s=seo"
@@ -106,82 +105,86 @@
   </section>
 
   <!-- ══════════════════════════════════════
-       SEPARADOR HEXAGONAL
+       SECCIÓN: EL LOCAL (GALERÍA INMERSIVA)
   ══════════════════════════════════════ -->
-  <div class="hex-divider">
-    <canvas class="hex-divider__canvas" data-hex-strip></canvas>
-  </div>
+  <section class="local" id="local">
+    <div class="local__sticky-container">
 
-  <!-- ══════════════════════════════════════
-       SECCIÓN: IDENTIDAD / EXPERIENCIA
-  ══════════════════════════════════════ -->
-  <section class="experiencia" id="experiencia">
-    <div class="container">
-
-      <div class="section-header">
-        <div class="section-eyebrow reveal-up">💈 Madrid</div>
+      <div class="local__header">
+        <div class="section-eyebrow reveal-up">El Local</div>
         <h2 class="section-title reveal-up delay-1">
-          Donde el fade habla por ti.<br />
+          El espacio.<br />
+          <em>El estilo.</em>
         </h2>
       </div>
 
-      <div class="experiencia__grid">
+      <!-- Galería horizontal táctil -->
+      <div class="local__gallery-wrapper">
+        <div class="local__gallery" id="localGallery">
 
-        <div class="experiencia__feature reveal-up delay-1">
-          <div class="feature-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-            </svg>
+          <div class="local__slide local__slide--barber">
+            <div class="local__slide-img">
+              <img src="images/javs.png" alt="Javier, barbero en Madrid" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Tu Barbero</span>
+              <p>Javier.<br>Escucha. Corta.<br>Resultado habla.</p>
+            </div>
           </div>
-          <h3>Detalle en cada línea</h3>
-          <p>Fade limpio.<br>Acabado impecable.</p>
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/chairs.png" alt="Sillones premium JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Sillones</span>
+              <p>Piel negra.<br>Cromo satinado.</p>
+            </div>
+          </div>
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/local.png" alt="Vista completa del local" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">El Espacio</span>
+              <p>Mármol negro.<br>Techo hexagonal.<br>Look propio.</p>
+            </div>
+          </div>
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/hexagons.png" alt="Luces hexagonales LED" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+            <div class="local__slide-caption">
+              <span class="slide-tag">Techo LED</span>
+              <p>Hexágonos LED.<br>Fondo negro.<br>Firma del local.</p>
+            </div>
+          </div>
+
         </div>
 
-        <div class="experiencia__feature reveal-up delay-2">
-          <div class="feature-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M16 24C16 19.6 19.6 16 24 16C28.4 16 32 19.6 32 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="24" cy="26" r="3" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3>El ambiente también</h3>
-          <p>Mármol negro.<br>Luces hexagonales.<br>Nivel.</p>
-        </div>
-
-        <div class="experiencia__feature reveal-up delay-3">
-          <div class="feature-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 36L20 20L28 28L36 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="36" cy="12" r="3" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3>4.9 🔥</h3>
-          <p>181 reseñas.<br>Los clientes repiten.</p>
-        </div>
-
-      </div>
-
-      <!-- Imagen inmersiva del local -->
-      <div class="experiencia__visual reveal-scale">
-        <div class="experiencia__img-wrap">
-          <img src="images/local.png" alt="Interior JAVS THE BARBER" loading="lazy" />
-          <div class="experiencia__img-overlay"></div>
-          <div class="experiencia__img-badge">
-            <span class="badge-num">4.9</span>
-            <span class="badge-label">Valoración<br>Booksy</span>
-          </div>
-        </div>
-        <div class="experiencia__quote">
-          <blockquote>
-            "Me asesoró, me hizo un corte de 10. Buen ambiente y profesionalidad."
-          </blockquote>
-          <cite>— Alexander · Booksy ✓</cite>
+        <!-- Controles galería -->
+        <div class="local__gallery-nav">
+          <button class="gallery-btn gallery-btn--prev" id="galleryPrev" aria-label="Anterior">‹</button>
+          <div class="gallery-dots" id="galleryDots"></div>
+          <button class="gallery-btn gallery-btn--next" id="galleryNext" aria-label="Siguiente">›</button>
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════
+       SEPARADOR HEXAGONAL
+  ══════════════════════════════════════ -->
+  <div class="hex-divider">
+    <canvas class="hex-divider__canvas" data-hex-strip></canvas>
+  </div>
 
   <!-- ══════════════════════════════════════
        SECCIÓN: SERVICIOS
@@ -256,146 +259,106 @@
   </section>
 
   <!-- ══════════════════════════════════════
-       SECCIÓN: EL LOCAL (GALERÍA INMERSIVA)
-  ══════════════════════════════════════ -->
-  <section class="local" id="local">
-    <div class="local__sticky-container">
-
-      <div class="local__header">
-        <div class="section-eyebrow reveal-up">El Local</div>
-        <h2 class="section-title reveal-up delay-1">
-          El espacio.<br />
-          <em>El estilo.</em>
-        </h2>
-      </div>
-
-      <!-- Galería horizontal táctil -->
-      <div class="local__gallery-wrapper">
-        <div class="local__gallery" id="localGallery">
-
-          <div class="local__slide">
-            <div class="local__slide-img">
-              <img src="images/chairs.png" alt="Sillones premium JAVS THE BARBER" loading="lazy" />
-              <div class="local__slide-overlay"></div>
-            </div>
-            <div class="local__slide-caption">
-              <span class="slide-tag">Sillones</span>
-              <p>Piel negra.<br>Cromo satinado.</p>
-            </div>
-          </div>
-
-          <div class="local__slide">
-            <div class="local__slide-img">
-              <img src="images/local.png" alt="Vista completa del local" loading="lazy" />
-              <div class="local__slide-overlay"></div>
-            </div>
-            <div class="local__slide-caption">
-              <span class="slide-tag">El Espacio</span>
-              <p>Mármol negro.<br>Techo hexagonal.<br>Look propio.</p>
-            </div>
-          </div>
-
-          <div class="local__slide">
-            <div class="local__slide-img">
-              <img src="images/hexagons.png" alt="Luces hexagonales LED" loading="lazy" />
-              <div class="local__slide-overlay"></div>
-            </div>
-            <div class="local__slide-caption">
-              <span class="slide-tag">Techo LED</span>
-              <p>Hexágonos LED.<br>Fondo negro.<br>Firma del local.</p>
-            </div>
-          </div>
-
-          <div class="local__slide local__slide--barber">
-            <div class="local__slide-img">
-              <img src="images/javs.png" alt="Javier, barbero en Madrid" loading="lazy" />
-              <div class="local__slide-overlay"></div>
-            </div>
-            <div class="local__slide-caption">
-              <span class="slide-tag">Tu Barbero</span>
-              <p>Javier.<br>Escucha. Corta.<br>Resultado habla.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Controles galería -->
-        <div class="local__gallery-nav">
-          <button class="gallery-btn gallery-btn--prev" id="galleryPrev" aria-label="Anterior">‹</button>
-          <div class="gallery-dots" id="galleryDots"></div>
-          <button class="gallery-btn gallery-btn--next" id="galleryNext" aria-label="Siguiente">›</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       SEPARADOR HEXAGONAL 2
-  ══════════════════════════════════════ -->
-  <div class="hex-divider hex-divider--inverted">
-    <canvas class="hex-divider__canvas" data-hex-strip></canvas>
-  </div>
-
-  <!-- ══════════════════════════════════════
        SECCIÓN: CORTES (CARRUSEL)
   ══════════════════════════════════════ -->
   <section class="cortes" id="cortes">
-    <div class="container">
-      <div class="section-header">
+    <div class="local__sticky-container">
+
+      <div class="local__header">
         <div class="section-eyebrow reveal-up">✂️ Trabajo</div>
         <h2 class="section-title reveal-up delay-1">
           Resultados.<br />
           <em>Fade a fade.</em>
         </h2>
       </div>
-    </div>
 
-    <div class="cortes__carousel-wrap">
-      <div class="cortes__carousel" id="cortesCarousel">
-        <div class="cortes__item">
-          <img src="images/corte-01.png" alt="Corte fade JAVS THE BARBER" loading="lazy" />
+      <div class="local__gallery-wrapper">
+        <div class="local__gallery" id="cortesCarousel">
+
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-01.png" alt="Corte fade JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-02.png" alt="Corte fade JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-03.png" alt="Corte textura JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-04.png" alt="Corte degradado JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-05.png" alt="Corte skin fade JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-06.png" alt="Corte limpio JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-07.png" alt="Corte + barba JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-08.png" alt="Fade perfecto JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-09.png" alt="Corte estilo JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-10.png" alt="Look renovado JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-11.png" alt="Acabado preciso JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+          <div class="local__slide">
+            <div class="local__slide-img">
+              <img src="images/corte-12.png" alt="Resultado impecable JAVS THE BARBER" loading="lazy" />
+              <div class="local__slide-overlay"></div>
+            </div>
+          </div>
+
         </div>
-        <div class="cortes__item">
-          <img src="images/corte-02.png" alt="Corte fade JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-03.png" alt="Corte textura JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-04.png" alt="Corte degradado JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-05.png" alt="Corte skin fade JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-06.png" alt="Corte limpio JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-07.png" alt="Corte + barba JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-08.png" alt="Fade perfecto JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-09.png" alt="Corte estilo JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-10.png" alt="Look renovado JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-11.png" alt="Acabado preciso JAVS THE BARBER" loading="lazy" />
-        </div>
-        <div class="cortes__item">
-          <img src="images/corte-12.png" alt="Resultado impecable JAVS THE BARBER" loading="lazy" />
+
+        <!-- Controles -->
+        <div class="local__gallery-nav">
+          <button class="gallery-btn gallery-btn--prev" id="cortesPrev" aria-label="Anterior">‹</button>
+          <div class="gallery-dots" id="cortesDots"></div>
+          <button class="gallery-btn gallery-btn--next" id="cortesNext" aria-label="Siguiente">›</button>
         </div>
       </div>
 
-      <button class="cortes__btn cortes__btn--prev" id="cortesPrev" aria-label="Anterior">‹</button>
-      <button class="cortes__btn cortes__btn--next" id="cortesNext" aria-label="Siguiente">›</button>
     </div>
-
-    <div class="cortes__dots" id="cortesDots"></div>
   </section>
 
   <!-- ══════════════════════════════════════

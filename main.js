@@ -493,7 +493,7 @@ function initCortesCarousel() {
   const btnNext  = document.getElementById('cortesNext');
   if (!carousel) return;
 
-  const items = Array.from(carousel.querySelectorAll('.cortes__item'));
+  const items = Array.from(carousel.querySelectorAll('.local__slide'));
   const total = items.length;
   let current = 0;
 
