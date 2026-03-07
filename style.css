@@ -340,9 +340,9 @@ canvas { display: block; }
 }
 
 /* ══════════════════════════════════════
-   HERO — KEN BURNS (imágenes CSS, sin vídeo)
-   Compatible 100%: iOS Safari, Chrome iOS, Android, Desktop.
-   Sin bloqueos, sin permisos, sin plugins.
+   HERO — VÍDEO + FALLBACK KEN BURNS
+   Prioridad: video/hero.mp4
+   Fallback automático: Ken Burns CSS (100% compatible iOS/Android)
 ══════════════════════════════════════ */
 .hero {
   position: relative;
@@ -355,69 +355,102 @@ canvas { display: block; }
   background: var(--black-deep);
 }
 
-/* Contenedor de slides */
+/* Contenedor principal de fondo */
 .hero__bg {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-/* Cada slide = una imagen de fondo con animación Ken Burns */
-.hero__bg-slide {
+/* ── VÍDEO ──────────────────────────────── */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 2;
+  opacity: 0;                          /* oculto hasta que JS confirme reproducción */
+  transition: opacity 1s ease;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* JS añade esta clase cuando el vídeo está reproduciéndose */
+.hero__video.playing {
+  opacity: 1;
+}
+
+/* Eliminar cualquier control nativo del browser (botón play iOS) */
+.hero__video::-webkit-media-controls,
+.hero__video::-webkit-media-controls-enclosure,
+.hero__video::-webkit-media-controls-panel,
+.hero__video::-webkit-media-controls-play-button,
+.hero__video::-webkit-media-controls-start-playback-button { display: none !important; }
+
+/* ── KEN BURNS FALLBACK ─────────────────── */
+.hero__kb {
+  position: absolute;
+  inset: 0;
+  z-index: 1;                          /* detrás del vídeo */
+}
+
+.hero__kb-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center;
   opacity: 0;
   will-change: transform, opacity;
 }
 
-/* Las tres imágenes del local */
-.hero__bg-slide--1 { background-image: url('images/local.png');    background-position: center 20%; }
-.hero__bg-slide--2 { background-image: url('images/chairs.png');   background-position: center 30%; }
-.hero__bg-slide--3 { background-image: url('images/hexagons.png'); background-position: center 50%; }
+.hero__kb-slide--1 { background-image: url('images/local.png');    background-position: center 20%; }
+.hero__kb-slide--2 { background-image: url('images/chairs.png');   background-position: center 30%; }
+.hero__kb-slide--3 { background-image: url('images/hexagons.png'); background-position: center 50%; }
 
-/* ── Secuencia crossfade ──
-   Cada ciclo dura 21s (7s visible × 3 slides).
-   La animación kenBurns hace el zoom lento mientras el slide está activo. */
-.hero__bg-slide--1 { animation: kbFade 21s 0s   infinite; }
-.hero__bg-slide--2 { animation: kbFade 21s 7s   infinite; }
-.hero__bg-slide--3 { animation: kbFade 21s 14s  infinite; }
+/* Animación activa por defecto (fallback visible mientras vídeo carga) */
+.hero__kb-slide--1 { animation: kbFade 21s 0s  infinite; }
+.hero__kb-slide--2 { animation: kbFade 21s 7s  infinite; }
+.hero__kb-slide--3 { animation: kbFade 21s 14s infinite; }
 
 @keyframes kbFade {
-  /* Entrada: fade in con zoom desde 100% a 108% */
-  0%   { opacity: 0;   transform: scale(1.00); }
-  4%   { opacity: 1;   transform: scale(1.02); }
-  /* Visible y en movimiento */
-  28%  { opacity: 1;   transform: scale(1.08); }
-  /* Salida: fade out */
-  33%  { opacity: 0;   transform: scale(1.09); }
-  /* Resto del ciclo: invisible */
-  100% { opacity: 0;   transform: scale(1.00); }
+  0%   { opacity: 0; transform: scale(1.00); }
+  4%   { opacity: 1; transform: scale(1.02); }
+  28%  { opacity: 1; transform: scale(1.08); }
+  33%  { opacity: 0; transform: scale(1.09); }
+  100% { opacity: 0; transform: scale(1.00); }
 }
 
-/* Overlay oscuro — siempre encima de las imágenes */
+/* Cuando el vídeo está corriendo, pausamos el Ken Burns para ahorrar GPU */
+.hero__kb.paused .hero__kb-slide {
+  animation-play-state: paused;
+}
+
+/* ── OVERLAY ────────────────────────────── */
+/* z-index 3: siempre encima del vídeo (z2) y del Ken Burns (z1) */
 .hero__bg-overlay {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 3;
   pointer-events: none;
   background:
-    linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.12) 100%),
+    linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.12) 100%),
     linear-gradient(to top,   rgba(0,0,0,0.55) 0%, transparent 55%);
 }
 
-/* Reduce movimiento si el usuario lo prefiere */
+/* Reduce movimiento (accesibilidad) */
 @media (prefers-reduced-motion: reduce) {
-  .hero__bg-slide {
-    animation: kbFadeOnly 21s infinite !important;
+  .hero__kb-slide {
+    animation: kbStatic 21s infinite !important;
   }
-  @keyframes kbFadeOnly {
-    0%   { opacity: 0; transform: scale(1); }
-    4%   { opacity: 1; transform: scale(1); }
-    28%  { opacity: 1; transform: scale(1); }
-    33%  { opacity: 0; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1); }
+  @keyframes kbStatic {
+    0%   { opacity: 0; transform: none; }
+    4%   { opacity: 1; transform: none; }
+    28%  { opacity: 1; transform: none; }
+    33%  { opacity: 0; transform: none; }
+    100% { opacity: 0; transform: none; }
   }
 }
 

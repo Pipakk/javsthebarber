@@ -47,11 +47,31 @@
   ══════════════════════════════════════ -->
   <section class="hero" id="hero">
 
-    <!-- Fondo Ken Burns — crossfade entre imágenes del local -->
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__bg-slide hero__bg-slide--1"></div>
-      <div class="hero__bg-slide hero__bg-slide--2"></div>
-      <div class="hero__bg-slide hero__bg-slide--3"></div>
+    <!-- Fondo hero: vídeo con fallback Ken Burns -->
+    <div class="hero__bg" id="heroBg" aria-hidden="true">
+
+      <!-- Vídeo (prioridad) — JS lo activa si el browser puede reproducirlo -->
+      <video
+        id="heroVideo"
+        class="hero__video"
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        tabindex="-1"
+      >
+        <source src="video/hero.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Ken Burns (fallback) — siempre presente en DOM, visible si el vídeo falla -->
+      <div class="hero__kb" id="heroKb">
+        <div class="hero__kb-slide hero__kb-slide--1"></div>
+        <div class="hero__kb-slide hero__kb-slide--2"></div>
+        <div class="hero__kb-slide hero__kb-slide--3"></div>
+      </div>
+
+      <!-- Overlay oscuro — siempre encima de todo -->
       <div class="hero__bg-overlay"></div>
     </div>
 
