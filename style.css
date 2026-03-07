@@ -341,13 +341,12 @@ canvas { display: block; }
 
 /* ══════════════════════════════════════
    HERO — VÍDEO + FALLBACK KEN BURNS
-   Prioridad: video/hero.mp4
-   Fallback automático: Ken Burns CSS (100% compatible iOS/Android)
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  min-height: 100svh;
+  width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -355,65 +354,74 @@ canvas { display: block; }
   background: var(--black-deep);
 }
 
-/* Contenedor principal de fondo */
+/* ── Bloque de fondo: ocupa exactamente el hero ── */
 .hero__bg {
   position: absolute;
-  inset: 0;
-  z-index: 1;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
 }
 
-/* ── VÍDEO ──────────────────────────────── */
+/* ── VÍDEO ── */
 .hero__video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  z-index: 2;
-  opacity: 0;                          /* oculto hasta que JS confirme reproducción */
-  transition: opacity 1s ease;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.2s ease;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
+  display: block;
 }
 
-/* JS añade esta clase cuando el vídeo está reproduciéndose */
 .hero__video.playing {
   opacity: 1;
 }
 
-/* Eliminar cualquier control nativo del browser (botón play iOS) */
 .hero__video::-webkit-media-controls,
 .hero__video::-webkit-media-controls-enclosure,
 .hero__video::-webkit-media-controls-panel,
 .hero__video::-webkit-media-controls-play-button,
-.hero__video::-webkit-media-controls-start-playback-button { display: none !important; }
+.hero__video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
 
-/* ── KEN BURNS FALLBACK ─────────────────── */
+/* ── KEN BURNS (fallback debajo del vídeo) ── */
 .hero__kb {
   position: absolute;
-  inset: 0;
-  z-index: 1;                          /* detrás del vídeo */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
 }
 
 .hero__kb-slide {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-size: cover;
   opacity: 0;
   will-change: transform, opacity;
 }
 
-.hero__kb-slide--1 { background-image: url('images/local.png');    background-position: center 20%; }
-.hero__kb-slide--2 { background-image: url('images/chairs.png');   background-position: center 30%; }
-.hero__kb-slide--3 { background-image: url('images/hexagons.png'); background-position: center 50%; }
-
-/* Animación activa por defecto (fallback visible mientras vídeo carga) */
-.hero__kb-slide--1 { animation: kbFade 21s 0s  infinite; }
-.hero__kb-slide--2 { animation: kbFade 21s 7s  infinite; }
-.hero__kb-slide--3 { animation: kbFade 21s 14s infinite; }
+.hero__kb-slide--1 {
+  background-image: url('images/local.png');
+  background-position: center 20%;
+  animation: kbFade 21s 0s infinite;
+}
+.hero__kb-slide--2 {
+  background-image: url('images/chairs.png');
+  background-position: center 30%;
+  animation: kbFade 21s 7s infinite;
+}
+.hero__kb-slide--3 {
+  background-image: url('images/hexagons.png');
+  background-position: center 50%;
+  animation: kbFade 21s 14s infinite;
+}
 
 @keyframes kbFade {
   0%   { opacity: 0; transform: scale(1.00); }
@@ -423,44 +431,40 @@ canvas { display: block; }
   100% { opacity: 0; transform: scale(1.00); }
 }
 
-/* Cuando el vídeo está corriendo, pausamos el Ken Burns para ahorrar GPU */
 .hero__kb.paused .hero__kb-slide {
   animation-play-state: paused;
 }
 
-/* ── OVERLAY ────────────────────────────── */
-/* z-index 3: siempre encima del vídeo (z2) y del Ken Burns (z1) */
+/* ── OVERLAY oscuro: encima de vídeo y Ken Burns, debajo del contenido ── */
 .hero__bg-overlay {
   position: absolute;
-  inset: 0;
-  z-index: 3;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.12) 100%),
+    linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.12) 100%),
     linear-gradient(to top,   rgba(0,0,0,0.55) 0%, transparent 55%);
 }
 
-/* Reduce movimiento (accesibilidad) */
 @media (prefers-reduced-motion: reduce) {
-  .hero__kb-slide {
-    animation: kbStatic 21s infinite !important;
-  }
+  .hero__kb-slide { animation: kbStatic 21s infinite !important; }
   @keyframes kbStatic {
-    0%   { opacity: 0; transform: none; }
-    4%   { opacity: 1; transform: none; }
-    28%  { opacity: 1; transform: none; }
-    33%  { opacity: 0; transform: none; }
-    100% { opacity: 0; transform: none; }
+    0%  { opacity: 0; transform: none; }
+    4%  { opacity: 1; transform: none; }
+    28% { opacity: 1; transform: none; }
+    33% { opacity: 0; transform: none; }
+    100%{ opacity: 0; transform: none; }
   }
 }
 
-/* Contenido hero */
+/* Contenido hero — encima del overlay (z2) */
 .hero__content {
   position: relative;
   z-index: 10;
-  padding: 40px 20px 100px;
-  max-width: 680px;
   width: 100%;
+  max-width: 680px;
+  padding: 40px 20px 100px;
 }
 
 .hero__eyebrow {
