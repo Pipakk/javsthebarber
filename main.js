@@ -484,6 +484,82 @@ function initLazyCanvases() {
 }
 
 /* ══════════════════════════════════════
+   CARRUSEL DE CORTES
+══════════════════════════════════════ */
+function initCortesCarousel() {
+  const carousel = document.getElementById('cortesCarousel');
+  const dotsWrap = document.getElementById('cortesDots');
+  const btnPrev  = document.getElementById('cortesPrev');
+  const btnNext  = document.getElementById('cortesNext');
+  if (!carousel) return;
+
+  const items = Array.from(carousel.querySelectorAll('.cortes__item'));
+  const total = items.length;
+  let current = 0;
+
+  /* ── Dots ── */
+  items.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Corte ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = () => Array.from(dotsWrap.querySelectorAll('.dot'));
+
+  function updateDots(idx) {
+    dots().forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    const item = items[current];
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    updateDots(current);
+  }
+
+  if (btnPrev) btnPrev.addEventListener('click', () => goTo(current - 1));
+  if (btnNext) btnNext.addEventListener('click', () => goTo(current + 1));
+
+  /* ── Actualizar dot activo al hacer scroll ── */
+  let scrollTimer;
+  carousel.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const center = carousel.scrollLeft + carousel.clientWidth / 2;
+      let closest = 0;
+      let minDist = Infinity;
+      items.forEach((item, i) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const dist = Math.abs(center - itemCenter);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      current = closest;
+      updateDots(current);
+    }, 80);
+  }, { passive: true });
+
+  /* ── Arrastre con ratón (desktop) ── */
+  let isDown = false, startX = 0, scrollStart = 0;
+  carousel.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX;
+    scrollStart = carousel.scrollLeft;
+    carousel.classList.add('is-dragging');
+  });
+  document.addEventListener('mouseup', () => {
+    isDown = false;
+    carousel.classList.remove('is-dragging');
+  });
+  carousel.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    carousel.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+}
+
+/* ══════════════════════════════════════
    INIT — DOMContentLoaded
 ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -501,4 +577,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothAnchors();
   initCountUp();
   initLazyCanvases();
+  initCortesCarousel();
 });
