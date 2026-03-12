@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Planes de Fidelización · JAVS THE BARBER</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050506;
+      --bg-alt: #0c0c11;
+      --card: #111118;
+      --card-soft: #161621;
+      --border-soft: rgba(255,255,255,0.06);
+      --border-strong: rgba(255,255,255,0.16);
+      --white: #f5f5f7;
+      --muted: #9a9aad;
+      --gold: #c9a96e;
+      --gold-soft: rgba(201,169,110,0.22);
+      --accent: #f5f5f7;
+      --danger: #ff5c7a;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --radius-card: 18px;
+      --shadow-soft: 0 22px 70px rgba(0,0,0,0.65);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(201,169,110,0.10), transparent 60%),
+        repeating-linear-gradient(
+          135deg,
+          #050506 0px,
+          #050506 22px,
+          #07070c 22px,
+          #07070c 44px
+        );
+      color: var(--white);
+      font-family: var(--font-ui);
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 16px 60px;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(32px, 6vw, 46px);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .intro {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .badge-rec {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(21, 184, 133, 0.12);
+      border: 1px solid rgba(21,184,133,0.4);
+      color: #a4f4d2;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Grid planes */
+    .plans {
+      margin-top: 40px;
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .plans {
+        grid-template-columns: repeat(3, minmax(0,1fr));
+      }
+    }
+
+    .plan {
+      position: relative;
+      border-radius: var(--radius-card);
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04), transparent 55%), var(--card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      padding: 24px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .plan--pro {
+      background:
+        radial-gradient(circle at top, rgba(201,169,110,0.24), transparent 60%),
+        var(--card-soft);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-4px);
+    }
+
+    @media (min-width: 900px) {
+      .plan--pro { transform: translateY(-12px); }
+    }
+
+    .plan__head {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .plan__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .plan__tagline {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .plan__pill {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.85);
+      margin-top: 2px;
+    }
+
+    .plan--pro .plan__pill {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.16);
+      color: var(--gold);
+    }
+
+    .plan__price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .plan__price-main {
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .plan__price-main span {
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .plan__price-note {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .plan__divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+      opacity: 0.6;
+    }
+
+    .plan__section-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 4px;
+    }
+
+    .plan__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: rgba(245,245,247,0.88);
+    }
+
+    .plan__list li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .plan__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-top: 6px;
+      background: var(--gold-soft);
+    }
+
+    .plan--pro .plan__dot {
+      background: rgba(201,169,110,0.7);
+    }
+
+    .plan__meta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .plan__cta {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.26);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.12s ease;
+    }
+
+    .plan__cta:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .plan--pro .plan__cta {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: #111014;
+    }
+
+    .plan--pro .plan__cta:hover {
+      background: #f1d8a0;
+      border-color: #f1d8a0;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer strong {
+      color: var(--gold);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Planes mensuales</div>
+      <h1>Fideliza a tus clientes.<br><em>Sin complicarte la vida.</em></h1>
+      <p class="subtitle">JAVS THE BARBER · SOLUCIONES DIGITALES</p>
+      <p class="intro">
+        Elige el plan que mejor encaja con tu momento. Desde una tarjeta virtual de sellos lista para usar,
+        hasta una solución completa con web y reservas online tipo Booksy, todo gestionado y mantenido por nosotros.
+      </p>
+      <div class="badge-rec">RECOMENDADO · PLAN PRO</div>
+    </header>
+
+    <main class="plans">
+      <!-- Básico -->
+      <section class="plan">
+        <div class="plan__head">
+          <div class="plan__name">Plan Básico</div>
+          <div class="plan__tagline">Tarjeta de sellos digital</div>
+          <span class="plan__pill">Solo fidelización</span>
+
+          <div class="plan__price">
+            <div class="plan__price-main">15<span>€/mes</span></div>
+          </div>
+          <div class="plan__price-note">Alta incluida</div>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Incluye</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Tarjeta virtual de sellos para tus clientes<br>
+                (escanean un QR y acumulan cortes hasta el gratis).
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Configuración inicial del programa de fidelización<br>
+                (número de cortes hasta el gratis, condiciones, textos).
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Panel básico para ver y validar sellos / cortes gratis<br>
+                con control de seguridad mediante QR.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Especificaciones técnicas</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>Infraestructura en la nube (Supabase + Vercel) con backups automáticos.</span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>Base de datos segura para clientes, sellos y recompensas.</span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>QR únicos firmados criptográficamente para evitar fraudes.</span>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <a href="#" class="plan__cta">Quiero el plan básico</a>
+      </section>
+
+      <!-- Pro (Recomendado) -->
+      <section class="plan plan--pro">
+        <div class="plan__head">
+          <div class="plan__name">Plan Pro</div>
+          <div class="plan__tagline">Web + fidelización integrada</div>
+          <span class="plan__pill">Recomendado</span>
+
+          <div class="plan__price">
+            <div class="plan__price-main">20<span>€/mes</span></div>
+          </div>
+          <div class="plan__price-note">Alta y diseño incluidos · Sin sorpresas</div>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Incluye todo lo del Básico, más</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Web premium de barbería optimizada para móvil<br>
+                con tu marca, fotos, servicios y enlaces a reservas.
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Integración directa con la tarjeta de sellos digital:<br>
+                acceso a tu programa de fidelidad desde la propia web.
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Textos, estructura y diseño pensados para convertir:<br>
+                foco en reservar cita y en hacer que el cliente repita.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Especificaciones técnicas</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>Web ultra rápida (Next.js) desplegada en CDN global.</span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Diseño responsive real: optimizada primero para móvil,<br>
+                con versiones perfectas para tablet y desktop.
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>Optimización básica SEO para que te encuentren en Google.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="plan__meta">
+          <span>La opción equilibrada: imagen profesional + fidelización real.</span>
+          <span>Tú sigues cortando, nosotros cuidamos la parte digital.</span>
+        </div>
+
+        <a href="#" class="plan__cta">Quiero el plan pro</a>
+      </section>
+
+      <!-- Premium -->
+      <section class="plan">
+        <div class="plan__head">
+          <div class="plan__name">Plan Premium</div>
+          <div class="plan__tagline">Web tipo Booksy + fidelidad</div>
+          <span class="plan__pill">Para escalar</span>
+
+          <div class="plan__price">
+            <div class="plan__price-main">60<span>€/mes</span></div>
+          </div>
+          <div class="plan__price-note">Plataforma avanzada de reservas + sellos</div>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Incluye todo lo del Pro, más</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Desarrollo de un sistema de reservas propio tipo Booksy<br>
+                integrado en tu web: selección de servicio, fecha y hora.
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Gestión de agenda online: vista de calendario para organizar<br>
+                citas por barbero, huecos libres y tiempos de servicio.
+              </span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>
+                Sin comisiones por reserva: pagas una cuota fija mensual,<br>
+                independientemente del volumen de citas.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="plan__divider"></div>
+
+        <div>
+          <div class="plan__section-title">Especificaciones técnicas</div>
+          <ul class="plan__list">
+            <li>
+              <span class="plan__dot"></span>
+              <span>Arquitectura pensada para escalar: base de datos en la nube y APIs seguras.</span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>Panel privado para gestión de citas, clientes y recompensas.</span>
+            </li>
+            <li>
+              <span class="plan__dot"></span>
+              <span>Posibilidad de integrar recordatorios por email/SMS (costes de envío aparte).</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="plan__meta">
+          <span>Si quieres dejar de depender de plataformas externas.</span>
+          <span>Ideal para barberías con alto volumen y varios barberos.</span>
+        </div>
+
+        <a href="#" class="plan__cta">Quiero el plan premium</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Todos los planes incluyen <strong>mantenimiento, monitorización básica</strong> y<br>
+        actualizaciones de seguridad del servicio sin coste adicional.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
+
