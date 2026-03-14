@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Planes de Fidelización · JAVS THE BARBER</title>
+  <meta name="description" content="Web profesional + fidelización de clientes para tu barbería. Planes desde 15€/mes. Sin permanencia." />
 
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -23,7 +23,6 @@
       --gold: #c9a96e;
       --gold-soft: rgba(201,169,110,0.22);
       --accent: #f5f5f7;
-      --danger: #ff5c7a;
 
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -39,93 +38,130 @@
       background:
         radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 55%),
         radial-gradient(circle at bottom right, rgba(201,169,110,0.10), transparent 60%),
-        repeating-linear-gradient(
-          135deg,
-          #050506 0px,
-          #050506 22px,
-          #07070c 22px,
-          #07070c 44px
-        );
+        var(--bg);
       color: var(--white);
       font-family: var(--font-ui);
       -webkit-font-smoothing: antialiased;
-      padding: 40px 16px 60px;
     }
 
-    .page {
-      max-width: 1080px;
+    /* ── FADE-UP ANIMATION ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 48px;
+      max-width: 720px;
       margin: 0 auto;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    h1 {
+    .hero__headline {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(32px, 6vw, 46px);
+      font-size: clamp(32px, 7vw, 52px);
       letter-spacing: -0.02em;
-      margin-bottom: 8px;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
-
-    h1 em {
-      font-style: italic;
+    .hero__subhead {
+      font-size: clamp(15px, 2.5vw, 18px);
       color: var(--muted);
-      font-weight: 300;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
+      line-height: 1.6;
       margin-bottom: 24px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
-    .intro {
-      max-width: 640px;
-      margin: 0 auto;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .badge-rec {
+    .hero__badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
+      padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(21, 184, 133, 0.12);
-      border: 1px solid rgba(21,184,133,0.4);
-      color: #a4f4d2;
+      background: var(--gold-soft);
+      border: 1px solid rgba(201,169,110,0.4);
+      color: var(--gold);
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-top: 6px;
     }
 
-    /* Grid planes */
+    /* ── TOGGLE ── */
+    .toggle-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin: 48px auto 36px;
+    }
+    .toggle-label {
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .toggle-label.active {
+      color: var(--white);
+    }
+    .toggle-track {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-track.anual {
+      background: var(--gold-soft);
+      border-color: rgba(201,169,110,0.4);
+    }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--white);
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .toggle-track.anual .toggle-thumb {
+      transform: translateX(24px);
+      background: var(--gold);
+    }
+    .toggle-savings {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .toggle-savings.show {
+      opacity: 1;
+    }
+
+    /* ── PLANS GRID ── */
     .plans {
-      margin-top: 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px;
       display: grid;
       gap: 18px;
     }
-
     @media (min-width: 900px) {
-      .plans {
-        grid-template-columns: repeat(3, minmax(0,1fr));
-      }
+      .plans { grid-template-columns: repeat(3, minmax(0,1fr)); }
     }
 
     .plan {
@@ -134,89 +170,73 @@
       background: radial-gradient(circle at top, rgba(255,255,255,0.04), transparent 55%), var(--card);
       border: 1px solid var(--border-soft);
       box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-      padding: 24px 20px 22px;
+      padding: 28px 22px 24px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
-
     .plan--pro {
-      background:
-        radial-gradient(circle at top, rgba(201,169,110,0.24), transparent 60%),
-        var(--card-soft);
+      background: radial-gradient(circle at top, rgba(201,169,110,0.24), transparent 60%), var(--card-soft);
       border-color: var(--border-strong);
       box-shadow: var(--shadow-soft);
       transform: translateY(-4px);
     }
-
     @media (min-width: 900px) {
       .plan--pro { transform: translateY(-12px); }
     }
 
-    .plan__head {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .plan__popular {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #111014;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
+
+    .plan__head { display: flex; flex-direction: column; gap: 4px; }
 
     .plan__name {
       font-family: var(--font-display);
       font-weight: 400;
-      font-size: 22px;
-      letter-spacing: 0.08em;
+      font-size: 24px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-
     .plan__tagline {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .plan__pill {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.22);
-      color: rgba(255,255,255,0.85);
-      margin-top: 2px;
-    }
-
-    .plan--pro .plan__pill {
-      border-color: var(--gold);
-      background: rgba(201,169,110,0.16);
-      color: var(--gold);
+      font-style: italic;
     }
 
     .plan__price {
       display: flex;
       align-items: baseline;
       gap: 4px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
-
     .plan__price-main {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 500;
     }
-
     .plan__price-main span {
       font-size: 16px;
       font-weight: 400;
       opacity: 0.8;
     }
-
-    .plan__price-note {
-      font-size: 12px;
+    .plan__price-old {
+      font-size: 16px;
       color: var(--muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      text-decoration: line-through;
+      margin-left: 8px;
+      display: none;
     }
 
     .plan__divider {
@@ -226,329 +246,499 @@
       opacity: 0.6;
     }
 
-    .plan__section-title {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 4px;
-    }
-
     .plan__list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 13px;
+      gap: 10px;
+      font-size: 14px;
       color: rgba(245,245,247,0.88);
     }
-
     .plan__list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .plan__check {
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 14px;
+    }
+    .plan--pro .plan__check { color: var(--gold); }
+
+    /* Tech details accordion */
+    .plan__details-toggle {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+    .plan__details-toggle:hover { color: var(--white); }
+    .plan__details-toggle svg {
+      transition: transform 0.3s;
+      width: 12px;
+      height: 12px;
+    }
+    .plan__details-toggle.open svg {
+      transform: rotate(180deg);
+    }
+    .plan__details-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .plan__details-content.open {
+      max-height: 300px;
+    }
+    .plan__details-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 8px 0 4px;
+    }
+    .plan__details-list li {
       display: flex;
       gap: 8px;
       align-items: flex-start;
     }
-
-    .plan__dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
+    .plan__details-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
       margin-top: 6px;
-      background: var(--gold-soft);
-    }
-
-    .plan--pro .plan__dot {
-      background: rgba(201,169,110,0.7);
-    }
-
-    .plan__meta {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--muted);
+      flex-shrink: 0;
     }
 
     .plan__cta {
-      margin-top: 10px;
+      margin-top: auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      padding: 10px 18px;
+      padding: 12px 20px;
       border: 1px solid rgba(255,255,255,0.26);
-      font-size: 11px;
-      letter-spacing: 0.16em;
+      font-size: 12px;
+      font-family: var(--font-ui);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--white);
-      transition: background 0.22s ease, border-color 0.22s ease, transform 0.12s ease;
+      transition: background 0.22s, border-color 0.22s, transform 0.12s;
     }
-
     .plan__cta:hover {
       transform: translateY(-1px);
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.5);
     }
-
     .plan--pro .plan__cta {
       border-color: var(--gold);
       background: var(--gold);
       color: #111014;
+      font-weight: 500;
     }
-
     .plan--pro .plan__cta:hover {
       background: #f1d8a0;
       border-color: #f1d8a0;
     }
 
-    footer {
-      margin-top: 40px;
+    /* ── TRUST BAR ── */
+    .trust {
+      max-width: 700px;
+      margin: 48px auto 0;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .trust__item {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+    }
+    .trust__item span:first-child {
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    /* ── ROI BANNER ── */
+    .roi {
+      max-width: 720px;
+      margin: 60px auto 0;
+      padding: 36px 28px;
       text-align: center;
+      border-radius: var(--radius-card);
+      background: radial-gradient(circle at center, rgba(201,169,110,0.12), transparent 70%), var(--card);
+      border: 1px solid rgba(201,169,110,0.18);
+    }
+    .roi__text {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 300;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+    .roi__text strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .roi__question {
+      margin-top: 12px;
+      font-size: 16px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      max-width: 680px;
+      margin: 64px auto 0;
+      padding: 0 16px 80px;
+    }
+    .faq__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(24px, 5vw, 34px);
+      text-align: center;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+    .faq__item {
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .faq__question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: var(--font-ui);
+      font-size: 15px;
+      text-align: left;
+      padding: 18px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: color 0.2s;
+    }
+    .faq__question:hover { color: var(--gold); }
+    .faq__icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s;
+    }
+    .faq__question.open .faq__icon { transform: rotate(45deg); }
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .faq__answer-inner {
+      padding: 0 0 18px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq__answer.open {
+      max-height: 200px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 0 16px 48px;
       font-size: 11px;
       color: var(--muted);
       line-height: 1.6;
     }
-
-    footer strong {
-      color: var(--gold);
-      font-weight: 500;
-    }
+    footer strong { color: var(--gold); font-weight: 500; }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="eyebrow">Planes mensuales</div>
-      <h1>Fideliza a tus clientes.<br><em>Sin complicarte la vida.</em></h1>
-      <p class="subtitle">JAVS THE BARBER · SOLUCIONES DIGITALES</p>
-      <p class="intro">
-        Elige el plan que mejor encaja con tu momento. Desde una tarjeta virtual de sellos lista para usar,
-        hasta una solución completa con web y reservas online tipo Booksy, todo gestionado y mantenido por nosotros.
-      </p>
-      <div class="badge-rec">RECOMENDADO · PLAN PRO</div>
-    </header>
 
-    <main class="plans">
-      <!-- Básico -->
-      <section class="plan">
-        <div class="plan__head">
-          <div class="plan__name">Plan Básico</div>
-          <div class="plan__tagline">Tarjeta de sellos digital</div>
-          <span class="plan__pill">Solo fidelización</span>
+  <!-- HERO -->
+  <section class="hero fade-up">
+    <h1 class="hero__headline">Tu barbería, en digital.<br>Sin complicaciones.</h1>
+    <p class="hero__subhead">Web profesional + fidelización de clientes. Todo gestionado. Tú solo cortas.</p>
+    <span class="hero__badge">Ya usado en JAVS THE BARBER · Madrid ★4.9</span>
+  </section>
 
-          <div class="plan__price">
-            <div class="plan__price-main">15<span>€/mes</span></div>
-          </div>
-          <div class="plan__price-note">Alta incluida</div>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Incluye</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Tarjeta virtual de sellos para tus clientes<br>
-                (escanean un QR y acumulan cortes hasta el gratis).
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Configuración inicial del programa de fidelización<br>
-                (número de cortes hasta el gratis, condiciones, textos).
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Panel básico para ver y validar sellos / cortes gratis<br>
-                con control de seguridad mediante QR.
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Especificaciones técnicas</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>Infraestructura en la nube (Supabase + Vercel) con backups automáticos.</span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>Base de datos segura para clientes, sellos y recompensas.</span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>QR únicos firmados criptográficamente para evitar fraudes.</span>
-            </li>
-          </ul>
-        </div>
-
-
-
-        <a href="https://buy.stripe.com/fZucN6f6c0nNfVp7BL1Nu03" class="plan__cta" target="_blank" rel="noopener">Quiero el plan básico</a>
-      </section>
-
-      <!-- Pro (Recomendado) -->
-      <section class="plan plan--pro">
-        <div class="plan__head">
-          <div class="plan__name">Plan Pro</div>
-          <div class="plan__tagline">Web + fidelización integrada</div>
-          <span class="plan__pill">Recomendado</span>
-
-          <div class="plan__price">
-            <div class="plan__price-main">20<span>€/mes</span></div>
-          </div>
-          <div class="plan__price-note">Alta y diseño incluidos · Sin sorpresas</div>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Incluye todo lo del Básico, más</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Web premium de barbería optimizada para móvil<br>
-                con tu marca, fotos, servicios y enlaces a reservas.
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Integración directa con la tarjeta de sellos digital:<br>
-                acceso a tu programa de fidelidad desde la propia web.
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Textos, estructura y diseño pensados para convertir:<br>
-                foco en reservar cita y en hacer que el cliente repita.
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Especificaciones técnicas</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>Web ultra rápida (Next.js) desplegada en CDN global.</span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Diseño responsive real: optimizada primero para móvil,<br>
-                con versiones perfectas para tablet y desktop.
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>Optimización básica SEO para que te encuentren en Google.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="plan__meta">
-          <span>La opción equilibrada: imagen profesional + fidelización real.</span>
-          <span>Tú sigues cortando, nosotros cuidamos la parte digital.</span>
-        </div>
-
-        <a href="https://buy.stripe.com/5kQcN69LS7Qf10v3lv1Nu02" class="plan__cta" target="_blank" rel="noopener">Quiero el plan pro</a>
-      </section>
-
-      <!-- Premium -->
-      <section class="plan">
-        <div class="plan__head">
-          <div class="plan__name">Plan Premium</div>
-          <div class="plan__tagline">Web tipo Booksy + fidelidad</div>
-          <span class="plan__pill">Para escalar</span>
-
-          <div class="plan__price">
-            <div class="plan__price-main">60<span>€/mes</span></div>
-          </div>
-          <div class="plan__price-note">Plataforma avanzada de reservas + sellos</div>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Incluye todo lo del Pro, más</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Desarrollo de un sistema de reservas propio tipo Booksy<br>
-                integrado en tu web: selección de servicio, fecha y hora.
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Gestión de agenda online: vista de calendario para organizar<br>
-                citas por barbero, huecos libres y tiempos de servicio.
-              </span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>
-                Sin comisiones por reserva: pagas una cuota fija mensual,<br>
-                independientemente del volumen de citas.
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="plan__divider"></div>
-
-        <div>
-          <div class="plan__section-title">Especificaciones técnicas</div>
-          <ul class="plan__list">
-            <li>
-              <span class="plan__dot"></span>
-              <span>Arquitectura pensada para escalar: base de datos en la nube y APIs seguras.</span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>Panel privado para gestión de citas, clientes y recompensas.</span>
-            </li>
-            <li>
-              <span class="plan__dot"></span>
-              <span>Posibilidad de integrar recordatorios por email/SMS (costes de envío aparte).</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="plan__meta">
-          <span>Si quieres dejar de depender de plataformas externas.</span>
-          <span>Ideal para barberías con alto volumen y varios barberos.</span>
-        </div>
-
-        <a href="https://buy.stripe.com/8x24gAaPWgmL9x1e091Nu04" class="plan__cta" target="_blank" rel="noopener">Quiero el plan premium</a>
-      </section>
-    </main>
-
-    <footer>
-      <p>
-        Todos los planes incluyen <strong>mantenimiento, monitorización básica</strong> y<br>
-        actualizaciones de seguridad del servicio sin coste adicional.
-      </p>
-    </footer>
+  <!-- TOGGLE Mensual / Anual -->
+  <div class="toggle-wrap fade-up">
+    <span class="toggle-label active" data-period="mensual">Mensual</span>
+    <div class="toggle-track" id="billingToggle" role="switch" aria-checked="false" tabindex="0">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span class="toggle-label" data-period="anual">Anual</span>
+    <span class="toggle-savings">2 meses gratis</span>
   </div>
+
+  <!-- PLANS -->
+  <main class="plans">
+
+    <!-- Básico -->
+    <section class="plan fade-up">
+      <div class="plan__head">
+        <div class="plan__name">Básico</div>
+        <div class="plan__tagline">Empieza a fidelizar</div>
+        <div class="plan__price">
+          <div class="plan__price-main" data-monthly="15" data-annual="12.50">15<span>€/mes</span></div>
+          <div class="plan__price-old">15 €/mes</div>
+        </div>
+      </div>
+
+      <div class="plan__divider"></div>
+
+      <ul class="plan__list">
+        <li><span class="plan__check">✓</span><span>Tarjeta de sellos digital con QR</span></li>
+        <li><span class="plan__check">✓</span><span>Panel de recompensas</span></li>
+        <li><span class="plan__check">✓</span><span>Configuración incluida</span></li>
+      </ul>
+
+      <button class="plan__details-toggle" aria-expanded="false">
+        Ver detalles técnicos
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+      </button>
+      <div class="plan__details-content">
+        <ul class="plan__details-list">
+          <li><span class="plan__details-dot"></span><span>Infraestructura cloud (Supabase + Vercel) con backups</span></li>
+          <li><span class="plan__details-dot"></span><span>Base de datos segura para clientes y sellos</span></li>
+          <li><span class="plan__details-dot"></span><span>QR firmados criptográficamente anti-fraude</span></li>
+        </ul>
+      </div>
+
+      <a href="https://buy.stripe.com/fZucN6f6c0nNfVp7BL1Nu03" class="plan__cta" target="_blank" rel="noopener"
+         data-monthly-href="https://buy.stripe.com/fZucN6f6c0nNfVp7BL1Nu03"
+         data-annual-href="https://buy.stripe.com/eVq14ocY4gmL7oT1dn1Nu07">Empezar ahora</a>
+    </section>
+
+    <!-- Pro -->
+    <section class="plan plan--pro fade-up" style="transition-delay:0.1s">
+      <span class="plan__popular">Más elegido</span>
+      <div class="plan__head">
+        <div class="plan__name">Pro</div>
+        <div class="plan__tagline">Web + fidelización</div>
+        <div class="plan__price">
+          <div class="plan__price-main" data-monthly="20" data-annual="16.67">20<span>€/mes</span></div>
+          <div class="plan__price-old">20 /mes€</div>
+        </div>
+      </div>
+
+      <div class="plan__divider"></div>
+
+      <ul class="plan__list">
+        <li><span class="plan__check">✓</span><span>Todo lo del Básico</span></li>
+        <li><span class="plan__check">✓</span><span>Web premium con tu marca</span></li>
+        <li><span class="plan__check">✓</span><span>SEO básico Google</span></li>
+        <li><span class="plan__check">✓</span><span>Diseño que convierte reservas</span></li>
+      </ul>
+
+      <button class="plan__details-toggle" aria-expanded="false">
+        Ver detalles técnicos
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+      </button>
+      <div class="plan__details-content">
+        <ul class="plan__details-list">
+          <li><span class="plan__details-dot"></span><span>Web ultra rápida (Next.js) en CDN global</span></li>
+          <li><span class="plan__details-dot"></span><span>Responsive real: móvil, tablet y desktop</span></li>
+          <li><span class="plan__details-dot"></span><span>Integración directa con tarjeta de sellos</span></li>
+        </ul>
+      </div>
+
+      <a href="https://buy.stripe.com/5kQcN69LS7Qf10v3lv1Nu02" class="plan__cta" target="_blank" rel="noopener"
+         data-monthly-href="https://buy.stripe.com/5kQcN69LS7Qf10v3lv1Nu02"
+         data-annual-href="https://buy.stripe.com/4gM5kE3nu5I75gLaNX1Nu06">Empezar ahora</a>
+    </section>
+
+    <!-- Premium -->
+    <section class="plan fade-up" style="transition-delay:0.2s">
+      <div class="plan__head">
+        <div class="plan__name">Premium</div>
+        <div class="plan__tagline">Tu propio Booksy</div>
+        <div class="plan__price">
+          <div class="plan__price-main" data-monthly="60" data-annual="50">60<span>€/mes</span></div>
+          <div class="plan__price-old">60 €/mes</div>
+        </div>
+      </div>
+
+      <div class="plan__divider"></div>
+
+      <ul class="plan__list">
+        <li><span class="plan__check">✓</span><span>Todo lo del Pro</span></li>
+        <li><span class="plan__check">✓</span><span>Sistema de reservas propio</span></li>
+        <li><span class="plan__check">✓</span><span>Sin comisiones por cita</span></li>
+        <li><span class="plan__check">✓</span><span>Panel de agenda y clientes</span></li>
+      </ul>
+
+      <button class="plan__details-toggle" aria-expanded="false">
+        Ver detalles técnicos
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+      </button>
+      <div class="plan__details-content">
+        <ul class="plan__details-list">
+          <li><span class="plan__details-dot"></span><span>Arquitectura escalable con APIs seguras</span></li>
+          <li><span class="plan__details-dot"></span><span>Panel privado de citas, clientes y recompensas</span></li>
+          <li><span class="plan__details-dot"></span><span>Posibilidad de recordatorios email/SMS</span></li>
+        </ul>
+      </div>
+
+      <a href="https://buy.stripe.com/8x24gAaPWgmL9x1e091Nu04" class="plan__cta" target="_blank" rel="noopener"
+         data-monthly-href="https://buy.stripe.com/8x24gAaPWgmL9x1e091Nu04"
+         data-annual-href="https://buy.stripe.com/7sY5kEe289Yn7oTg8h1Nu05">Empezar ahora</a>
+    </section>
+  </main>
+
+  <!-- TRUST BAR -->
+  <div class="trust fade-up">
+    <div class="trust__item"><span>✓</span><span>Sin permanencia</span></div>
+    <div class="trust__item"><span>✓</span><span>Alta incluida</span></div>
+    <div class="trust__item"><span>✓</span><span>Soporte en 24h</span></div>
+  </div>
+
+  <!-- ROI BANNER -->
+  <section class="roi fade-up">
+    <p class="roi__text">Un cliente que repite vale <strong>180€/año</strong>.</p>
+    <p class="roi__question">¿Cuánto te cuesta perderlo?</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq fade-up">
+    <h2 class="faq__title">Preguntas frecuentes</h2>
+
+    <div class="faq__item">
+      <button class="faq__question">
+        ¿Necesito saber de tecnología?
+        <svg class="faq__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+      </button>
+      <div class="faq__answer">
+        <p class="faq__answer-inner">Para nada. Nosotros nos encargamos de todo: configuración, diseño, puesta en marcha y mantenimiento. Tú solo necesitas atender a tus clientes.</p>
+      </div>
+    </div>
+
+    <div class="faq__item">
+      <button class="faq__question">
+        ¿Puedo cancelar cuando quiera?
+        <svg class="faq__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+      </button>
+      <div class="faq__answer">
+        <p class="faq__answer-inner">Sí, sin permanencia ni letra pequeña. Cancelas desde Stripe con un clic y dejas de pagar el mes siguiente.</p>
+      </div>
+    </div>
+
+    <div class="faq__item">
+      <button class="faq__question">
+        ¿Cuánto tarda en estar listo?
+        <svg class="faq__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+      </button>
+      <div class="faq__answer">
+        <p class="faq__answer-inner">El plan Básico se activa en 24-48h. Los planes Pro y Premium, entre 5 y 10 días laborables dependiendo del contenido que nos facilites.</p>
+      </div>
+    </div>
+
+    <div class="faq__item">
+      <button class="faq__question">
+        ¿Funciona con mi Instagram y Booksy?
+        <svg class="faq__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+      </button>
+      <div class="faq__answer">
+        <p class="faq__answer-inner">Sí. Integramos enlaces directos a tu Instagram, Booksy y cualquier plataforma que uses. En el plan Premium, las reservas van por tu propio sistema sin depender de terceros.</p>
+      </div>
+    </div>
+
+    <div class="faq__item">
+      <button class="faq__question">
+        ¿Qué incluye el mantenimiento?
+        <svg class="faq__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+      </button>
+      <div class="faq__answer">
+        <p class="faq__answer-inner">Actualizaciones de seguridad, monitorización del servicio, backups y soporte técnico por chat. Todo incluido en la cuota mensual, sin costes extra.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Todos los planes incluyen <strong>mantenimiento, monitorización</strong> y actualizaciones de seguridad sin coste adicional.</p>
+  </footer>
+
+  <script>
+    /* ── Fade-up on scroll ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    /* ── Billing toggle ── */
+    const toggle = document.getElementById('billingToggle');
+    const labels = document.querySelectorAll('.toggle-label');
+    const savings = document.querySelector('.toggle-savings');
+    const prices = document.querySelectorAll('.plan__price-main[data-monthly]');
+    const oldPrices = document.querySelectorAll('.plan__price-old');
+    const ctas = document.querySelectorAll('.plan__cta[data-monthly-href]');
+    let isAnual = false;
+
+    function setBilling(anual) {
+      isAnual = anual;
+      toggle.classList.toggle('anual', anual);
+      toggle.setAttribute('aria-checked', anual);
+      labels.forEach(l => l.classList.toggle('active', (l.dataset.period === 'anual') === anual));
+      savings.classList.toggle('show', anual);
+
+      prices.forEach((el) => {
+        const val = anual ? el.dataset.annual : el.dataset.monthly;
+        const display = parseFloat(val) % 1 === 0 ? parseInt(val) : val;
+        el.innerHTML = display + '<span>€/mes</span>';
+      });
+      oldPrices.forEach(el => { el.style.display = anual ? 'inline' : 'none'; });
+      ctas.forEach(el => { el.href = anual ? el.dataset.annualHref : el.dataset.monthlyHref; });
+    }
+
+    toggle.addEventListener('click', () => setBilling(!isAnual));
+    toggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setBilling(!isAnual); } });
+    labels.forEach(l => l.addEventListener('click', () => setBilling(l.dataset.period === 'anual')));
+
+    /* ── Tech details accordion ── */
+    document.querySelectorAll('.plan__details-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const open = btn.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        btn.nextElementSibling.classList.toggle('open', open);
+      });
+    });
+
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.faq__question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wasOpen = btn.classList.contains('open');
+        // close all
+        document.querySelectorAll('.faq__question.open').forEach(q => {
+          q.classList.remove('open');
+          q.nextElementSibling.classList.remove('open');
+        });
+        if (!wasOpen) {
+          btn.classList.add('open');
+          btn.nextElementSibling.classList.add('open');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
